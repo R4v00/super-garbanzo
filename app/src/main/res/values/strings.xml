@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sketchy Battery Wallpaper</string>
+    <string name="wallpaper_description">Animated sketchy battery gauge that reflects the current charge level.</string>
+    <string name="wallpaper_title">Sketchy Battery Gauge</string>
+    <string name="wallpaper_cta">Set as live wallpaper</string>
+    <string name="wallpaper_info">Battery level drives the gauge. Green over 20%, red under 10%.</string>
+</resources>
