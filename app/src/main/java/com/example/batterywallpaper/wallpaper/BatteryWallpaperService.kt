@@ -128,12 +128,14 @@ class BatteryWallpaperService : WallpaperService() {
         }
 
         private fun drawBattery(canvas: Canvas) {
-            val width = canvas.width.toFloat()
-            val height = canvas.height.toFloat()
-            val batteryWidth = width * wallpaperSettings.batteryWidth
-            val batteryHeight = height * wallpaperSettings.batteryHeight
-            val originX = (width - batteryWidth) / 2f
-            val originY = (height - batteryHeight) / 2f
+            val screenWidth = canvas.width.toFloat()
+            val screenHeight = canvas.height.toFloat()
+
+            val batteryWidth = screenWidth * wallpaperSettings.batteryWidth
+            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight // Use screenWidth to maintain aspect ratio
+
+            val originX = (screenWidth - batteryWidth) / 2f
+            val originY = (screenHeight - batteryHeight) / 2f
 
             outlinePaint.strokeWidth = batteryWidth * 0.04f
             outlinePaint.alpha = 255
@@ -152,11 +154,11 @@ class BatteryWallpaperService : WallpaperService() {
             val capWidth = batteryWidth * 0.1f
             val capHeight = batteryHeight * 0.25f
             val capPath = Path().apply {
-                val capOriginX = batteryBounds.right - outlinePaint.strokeWidth / 2f
+                val capOriginX = batteryBounds.right
                 val capOriginY = batteryBounds.centerY() - capHeight / 2f
                 moveTo(capOriginX, capOriginY + random.nextFloat() * wobble)
-                lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + random.nextFloat() * wobble)
-                lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + capHeight - random.nextFloat() * wobble)
+                lineTo(capOriginX + capWidth, capOriginY + random.nextFloat() * wobble)
+                lineTo(capOriginX + capWidth, capOriginY + capHeight - random.nextFloat() * wobble)
                 lineTo(capOriginX, capOriginY + capHeight - random.nextFloat() * wobble)
                 close()
             }

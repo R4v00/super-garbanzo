@@ -267,7 +267,7 @@ private fun DrawScope.drawSketchyBattery(
     batteryHeight: Float
 ) {
     val width = size.width * batteryWidth
-    val height = size.height * batteryHeight
+    val height = size.width * batteryHeight // Use size.width to maintain aspect ratio
     val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
     val strokeWidth = width * 0.04f
 
@@ -290,12 +290,12 @@ private fun DrawScope.drawSketchyBattery(
     val capWidth = width * 0.1f
     val capHeight = height * 0.25f
     val capPath = Path().apply {
-        val capOriginX = origin.x + width - strokeWidth / 2f
+        val capOriginX = origin.x + width
         val capOriginY = origin.y + (height - capHeight) / 2f
         val wobble = strokeWidth * 0.6f * animationLevel
         moveTo(capOriginX, capOriginY + random.nextFloat() * wobble)
-        lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + random.nextFloat() * wobble)
-        lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + capHeight - random.nextFloat() * wobble)
+        lineTo(capOriginX + capWidth, capOriginY + random.nextFloat() * wobble)
+        lineTo(capOriginX + capWidth, capOriginY + capHeight - random.nextFloat() * wobble)
         lineTo(capOriginX, capOriginY + capHeight - random.nextFloat() * wobble)
         close()
     }
