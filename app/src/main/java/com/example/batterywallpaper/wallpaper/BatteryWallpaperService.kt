@@ -60,7 +60,7 @@ class BatteryWallpaperService : WallpaperService() {
 
         private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
-        private var wallpaperSettings = com.example.batterywallpaper.data.WallpaperSettings(1f, 0.6f, 0.3f, Color.GREEN.hashCode(), Color.BLACK.hashCode(), Color.WHITE.hashCode(), Color.WHITE.hashCode())
+        private var wallpaperSettings = com.example.batterywallpaper.data.WallpaperSettings(1f, 0.6f, 0.3f, Color.GREEN.hashCode(), Color.BLACK.hashCode(), Color.WHITE.hashCode(), Color.WHITE.hashCode(), 0.5f)
 
         private val batteryReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
@@ -195,7 +195,7 @@ class BatteryWallpaperService : WallpaperService() {
             textPaint.color = wallpaperSettings.textColor
             textPaint.strokeWidth = batteryHeight * 0.01f
             val textTargetWidth = batteryWidth * 0.7f // 1 - (2 * 0.15)
-            textPaint.textSize = getTextSizeForWidth(textPaint, label, textTargetWidth)
+            textPaint.textSize = getTextSizeForWidth(textPaint, label, textTargetWidth) * wallpaperSettings.textSize
 
             val textWidth = textPaint.measureText(label)
             val textX = batteryBounds.centerX() - textWidth / 2f

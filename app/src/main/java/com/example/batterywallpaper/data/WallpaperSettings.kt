@@ -20,7 +20,8 @@ data class WallpaperSettings(
     val batteryColor: Int,
     val backgroundColor: Int,
     val textColor: Int,
-    val edgesColor: Int
+    val edgesColor: Int,
+    val textSize: Float
 )
 
 class WallpaperSettingsRepository(private val context: Context) {
@@ -34,7 +35,8 @@ class WallpaperSettingsRepository(private val context: Context) {
                 batteryColor = it[KEY_BATTERY_COLOR] ?: Color.Green.hashCode(),
                 backgroundColor = it[KEY_BACKGROUND_COLOR] ?: Color.Black.hashCode(),
                 textColor = it[KEY_TEXT_COLOR] ?: Color.White.hashCode(),
-                edgesColor = it[KEY_EDGES_COLOR] ?: Color.White.hashCode()
+                edgesColor = it[KEY_EDGES_COLOR] ?: Color.White.hashCode(),
+                textSize = it[KEY_TEXT_SIZE] ?: 0.5f
             )
         }
 
@@ -66,6 +68,10 @@ class WallpaperSettingsRepository(private val context: Context) {
         context.dataStore.edit { it[KEY_EDGES_COLOR] = color }
     }
 
+    suspend fun setTextSize(size: Float) {
+        context.dataStore.edit { it[KEY_TEXT_SIZE] = size }
+    }
+
     companion object {
         private val KEY_ANIMATION_LEVEL = floatPreferencesKey("animation_level")
         private val KEY_BATTERY_WIDTH = floatPreferencesKey("battery_width")
@@ -74,5 +80,6 @@ class WallpaperSettingsRepository(private val context: Context) {
         private val KEY_BACKGROUND_COLOR = intPreferencesKey("background_color")
         private val KEY_TEXT_COLOR = intPreferencesKey("text_color")
         private val KEY_EDGES_COLOR = intPreferencesKey("edges_color")
+        private val KEY_TEXT_SIZE = floatPreferencesKey("text_size")
     }
 }

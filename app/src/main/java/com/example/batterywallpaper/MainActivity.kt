@@ -145,6 +145,11 @@ private fun SettingsScreen() {
                 value = currentSettings.batteryHeight,
                 onValueChange = { scope.launch { settingsRepository.setBatteryHeight(it) } }
             )
+            SettingSlider(
+                label = "Text Size",
+                value = currentSettings.textSize,
+                onValueChange = { scope.launch { settingsRepository.setTextSize(it) } }
+            )
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
@@ -278,7 +283,8 @@ private fun SketchyBatteryPreview(
             textMeasurer = textMeasurer,
             animationLevel = settings?.animationLevel ?: 1f,
             batteryWidth = settings?.batteryWidth ?: 0.6f,
-            batteryHeight = settings?.batteryHeight ?: 0.3f
+            batteryHeight = settings?.batteryHeight ?: 0.3f,
+            textSize = settings?.textSize ?: 0.5f
         )
     }
 }
@@ -292,7 +298,8 @@ private fun DrawScope.drawSketchyBattery(
     textMeasurer: TextMeasurer,
     animationLevel: Float,
     batteryWidth: Float,
-    batteryHeight: Float
+    batteryHeight: Float,
+    textSize: Float
 ) {
     val width = size.width * batteryWidth
     val height = size.width * batteryHeight // Use size.width to maintain aspect ratio
@@ -357,7 +364,7 @@ private fun DrawScope.drawSketchyBattery(
     val label = "${(level * 100).roundToInt()}%"
     val textStyle = TextStyle(
         color = textColor,
-        fontSize = (height * 0.4f).sp // Adjusted to leave a 15% margin
+        fontSize = (height * textSize).sp
     )
     val textLayoutResult = textMeasurer.measure(label, style = textStyle)
     val textWobble = strokeWidth * 0.2f * animationLevel
