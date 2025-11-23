@@ -180,11 +180,11 @@ class BatteryWallpaperService : WallpaperService() {
                 }
             }.toInt()
 
+            val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.animationLevel) * strokeWidth
             val innerPadding = strokeWidth * 1.5f
             if (fillPaint.color != 0) { // Don't draw if transparent
                 val fillWidth = (batteryWidth - innerPadding * 2) * batteryPercent
                 val fillHeight = batteryHeight - innerPadding * 2
-                val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.animationLevel) * strokeWidth
 
                 val fillRect = RectF(
                     originX + innerPadding,
@@ -201,7 +201,6 @@ class BatteryWallpaperService : WallpaperService() {
             textPaint.textSize = getTextSizeForWidth(textPaint, label, textTargetWidth) * wallpaperSettings.textSize
 
             val textX = originX + batteryWidth / 2f
-            val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.animationLevel) * strokeWidth
             val textY = originY + batteryHeight / 2f - (textPaint.ascent() + textPaint.descent()) / 2f + wobbleOffset
             canvas.drawText(label, textX, textY, textPaint)
         }
