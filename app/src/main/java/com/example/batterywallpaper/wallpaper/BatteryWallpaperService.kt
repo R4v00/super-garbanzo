@@ -135,7 +135,7 @@ class BatteryWallpaperService : WallpaperService() {
             val originX = (width - batteryWidth) / 2f
             val originY = (height - batteryHeight) / 2f
 
-            outlinePaint.strokeWidth = (width * 0.02f)
+            outlinePaint.strokeWidth = batteryWidth * 0.04f
             outlinePaint.alpha = 255
             batteryBounds.set(originX, originY, originX + batteryWidth, originY + batteryHeight)
 
@@ -152,22 +152,12 @@ class BatteryWallpaperService : WallpaperService() {
             val capWidth = batteryWidth * 0.1f
             val capHeight = batteryHeight * 0.25f
             val capPath = Path().apply {
-                moveTo(
-                    batteryBounds.right + random.nextFloat() * wobble,
-                    batteryBounds.centerY() - capHeight / 2f + random.nextFloat() * wobble
-                )
-                lineTo(
-                    batteryBounds.right + capWidth + random.nextFloat() * wobble,
-                    batteryBounds.centerY() - capHeight / 2f + random.nextFloat() * wobble
-                )
-                lineTo(
-                    batteryBounds.right + capWidth + random.nextFloat() * wobble,
-                    batteryBounds.centerY() + capHeight / 2f + random.nextFloat() * wobble
-                )
-                lineTo(
-                    batteryBounds.right + random.nextFloat() * wobble,
-                    batteryBounds.centerY() + capHeight / 2f + random.nextFloat() * wobble
-                )
+                val capOriginX = batteryBounds.right - outlinePaint.strokeWidth / 2f
+                val capOriginY = batteryBounds.centerY() - capHeight / 2f
+                moveTo(capOriginX, capOriginY + random.nextFloat() * wobble)
+                lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + random.nextFloat() * wobble)
+                lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + capHeight - random.nextFloat() * wobble)
+                lineTo(capOriginX, capOriginY + capHeight - random.nextFloat() * wobble)
                 close()
             }
             canvas.drawPath(capPath, outlinePaint)

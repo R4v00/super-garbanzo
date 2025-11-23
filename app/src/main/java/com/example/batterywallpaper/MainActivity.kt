@@ -269,10 +269,10 @@ private fun DrawScope.drawSketchyBattery(
     val width = size.width * batteryWidth
     val height = size.height * batteryHeight
     val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
-    val strokeWidth = (size.width * 0.025f)
+    val strokeWidth = width * 0.04f
 
     fun Path.sketchyRect() {
-        val wobble = strokeWidth * 0.8f * animationLevel
+        val wobble = strokeWidth * 1.2f * animationLevel
         moveTo(origin.x + random.nextFloat() * wobble, origin.y + random.nextFloat() * wobble)
         lineTo(origin.x + width + random.nextFloat() * wobble, origin.y + random.nextFloat() * wobble)
         lineTo(origin.x + width + random.nextFloat() * wobble, origin.y + height + random.nextFloat() * wobble)
@@ -289,19 +289,19 @@ private fun DrawScope.drawSketchyBattery(
 
     val capWidth = width * 0.1f
     val capHeight = height * 0.25f
-    translate(left = origin.x + width, top = origin.y + (height - capHeight) / 2f) {
-        val capPath = Path().apply {
-            val wobble = strokeWidth * 0.6f * animationLevel
-            moveTo(random.nextFloat() * wobble, random.nextFloat() * wobble)
-            lineTo(capWidth + random.nextFloat() * wobble, random.nextFloat() * wobble)
-            lineTo(capWidth + random.nextFloat() * wobble, capHeight + random.nextFloat() * wobble)
-            lineTo(random.nextFloat() * wobble, capHeight + random.nextFloat() * wobble)
-            close()
-        }
-        drawPath(capPath, strokeColor, style = Stroke(width = strokeWidth * 0.9f))
+    val capPath = Path().apply {
+        val capOriginX = origin.x + width - strokeWidth / 2f
+        val capOriginY = origin.y + (height - capHeight) / 2f
+        val wobble = strokeWidth * 0.6f * animationLevel
+        moveTo(capOriginX, capOriginY + random.nextFloat() * wobble)
+        lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + random.nextFloat() * wobble)
+        lineTo(capOriginX + capWidth + random.nextFloat() * wobble, capOriginY + capHeight - random.nextFloat() * wobble)
+        lineTo(capOriginX, capOriginY + capHeight - random.nextFloat() * wobble)
+        close()
     }
+    drawPath(capPath, strokeColor, style = Stroke(width = strokeWidth * 0.9f))
 
-    val innerPadding = strokeWidth * 2.5f
+    val innerPadding = strokeWidth * 3f
     val fillWidth = (width - innerPadding * 2) * level
     val fillHeight = height - innerPadding * 2
     drawRoundRect(
