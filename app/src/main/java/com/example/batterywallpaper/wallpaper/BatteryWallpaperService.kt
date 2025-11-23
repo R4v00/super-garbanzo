@@ -46,6 +46,7 @@ class BatteryWallpaperService : WallpaperService() {
         private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.WHITE
             textSize = 64f
+            style = Paint.Style.STROKE
         }
         private val batteryBounds = RectF()
 
@@ -194,11 +195,21 @@ class BatteryWallpaperService : WallpaperService() {
 
             val label = "${batteryLevel.roundToInt()}%"
             textPaint.color = wallpaperSettings.textColor
-            textPaint.textSize = batteryHeight * 0.3f
-            val textWidth = textPaint.measureText(label)
-            val textX = batteryBounds.centerX() - textWidth / 2f
+            textPaint.strokeWidth = batteryHeight * 0.01f
+            val textTargetWidth = batteryWidth * 0.7f // 1 - (2 * 0.15)
+            textPaint.textSize = getTextSizeForWidth(textPaint, label, textTargetWidth)
+
+            val textX = batteryBounds.centerX() - textPaint.measureText(label) / 2f
             val textY = batteryBounds.centerY() + textPaint.textSize / 2f
-            canvas.drawText(label, textX, textY, textPaint)
+            val textWobble = outlinePaint.strokeWidth * 0.2f * wallpaperSettings.animationLevel
+            canvas.drawText(label, textX + random.nextFloat() * textWobble, textY + random.nextFloat() * textWobble, textPaint)
+        }
+
+        private fun getTextSizeForWidth(paint: Paint, text: String, width: Float): Float {
+            val testTextSize = 48f
+            paint.textSize = testTextSize
+            val textWidth = paint.measureText(text)
+            return testTextSize * width / textWidth
         }
 
         private fun nowSeconds(): Float = SystemClock.elapsedRealtime() / 1000f

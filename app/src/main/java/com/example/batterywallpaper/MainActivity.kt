@@ -352,19 +352,17 @@ private fun DrawScope.drawSketchyBattery(
     }
 
     val label = "${(level * 100).roundToInt()}%"
-    val textLayoutResult = textMeasurer.measure(
-        label,
-        style = TextStyle(
-            color = textColor,
-            fontSize = (height * 0.3f).sp
-        )
+    val textStyle = TextStyle(
+        color = textColor,
+        fontSize = (height * 0.3f).sp
     )
+    val textLayoutResult = textMeasurer.measure(label, style = textStyle)
+    val textWobble = strokeWidth * 0.2f * animationLevel
 
-    drawText(
-        textLayoutResult,
-        topLeft = Offset(
-            x = origin.x + (width - textLayoutResult.size.width) / 2f,
-            y = origin.y + (height - textLayoutResult.size.height) / 2f
-        )
-    )
+    translate(
+        left = origin.x + (width - textLayoutResult.size.width) / 2f + random.nextFloat() * textWobble,
+        top = origin.y + (height - textLayoutResult.size.height) / 2f + random.nextFloat() * textWobble
+    ) {
+        drawText(textLayoutResult)
+    }
 }
