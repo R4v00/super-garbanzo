@@ -50,6 +50,7 @@ import com.example.batterywallpaper.ui.theme.BatteryWallpaperTheme
 import com.example.batterywallpaper.wallpaper.BatteryWallpaperService
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import kotlin.math.sin
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -298,8 +299,9 @@ private fun DrawScope.drawSketchyBattery(
     val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
     val strokeWidth = width * 0.04f
 
+    val wobble = strokeWidth * 1.2f * animationLevel
+
     fun Path.sketchyRect() {
-        val wobble = strokeWidth * 1.2f * animationLevel
         moveTo(origin.x + random.nextFloat() * wobble, origin.y + random.nextFloat() * wobble)
         lineTo(origin.x + width + random.nextFloat() * wobble, origin.y + random.nextFloat() * wobble)
         lineTo(origin.x + width + random.nextFloat() * wobble, origin.y + height + random.nextFloat() * wobble)
@@ -319,7 +321,6 @@ private fun DrawScope.drawSketchyBattery(
     val capPath = Path().apply {
         val capOriginX = origin.x + width
         val capOriginY = origin.y + (height - capHeight) / 2f
-        val wobble = strokeWidth * 0.6f * animationLevel
         moveTo(capOriginX, capOriginY + random.nextFloat() * wobble)
         lineTo(capOriginX + capWidth, capOriginY + random.nextFloat() * wobble)
         lineTo(capOriginX + capWidth, capOriginY + capHeight - random.nextFloat() * wobble)
@@ -331,9 +332,11 @@ private fun DrawScope.drawSketchyBattery(
     val innerPadding = strokeWidth * 3f
     val fillWidth = (width - innerPadding * 2) * level
     val fillHeight = height - innerPadding * 2
+    val wobbleOffset = sin(System.currentTimeMillis() / 500f * animationLevel) * strokeWidth
+
     drawRoundRect(
         color = gaugeColor,
-        topLeft = Offset(origin.x + innerPadding, origin.y + innerPadding),
+        topLeft = Offset(origin.x + innerPadding, origin.y + innerPadding + wobbleOffset),
         size = androidx.compose.ui.geometry.Size(fillWidth, fillHeight),
         cornerRadius = androidx.compose.ui.geometry.CornerRadius(strokeWidth * 2, strokeWidth * 2)
     )
@@ -354,14 +357,14 @@ private fun DrawScope.drawSketchyBattery(
     val label = "${(level * 100).roundToInt()}%"
     val textStyle = TextStyle(
         color = textColor,
-        fontSize = (height * 0.3f).sp
+        fontSize = (height * 0.4f).sp // Adjusted to leave a 15% margin
     )
     val textLayoutResult = textMeasurer.measure(label, style = textStyle)
     val textWobble = strokeWidth * 0.2f * animationLevel
 
     translate(
         left = origin.x + (width - textLayoutResult.size.width) / 2f + random.nextFloat() * textWobble,
-        top = origin.y + (height - textLayoutResult.size.height) / 2f + random.nextFloat() * textWobble
+        top = origin.y + (height - textLayoutResult.size.height) / 2f + wobbleOffset
     ) {
         drawText(textLayoutResult)
     }

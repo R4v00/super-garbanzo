@@ -1,0 +1,21 @@
+R_DEF: Internal format may change without notice
+local
+color battery_amber
+color battery_green
+color battery_red
+color ic_launcher_background
+color md_theme_background
+color md_theme_on_primary
+color md_theme_on_surface
+color md_theme_primary
+color md_theme_surface
+drawable ic_launcher_foreground
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string wallpaper_cta
+string wallpaper_description
+string wallpaper_info
+string wallpaper_title
+style Theme.BatteryWallpaper
+xml battery_wallpaper

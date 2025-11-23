@@ -1,0 +1,428 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:2:1-39:12
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\39c815250087554a139986f35a106a74\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material3:material3-android:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3982a64fbb9990978e6597d46ab3cfb1\transformed\jetified-material3-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c93ad2e97effd1c795ce53425c5dbffc\transformed\jetified-material-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\d2f7a14ed049cd30d0040abbb8f7b61d\transformed\jetified-material-icons-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c311bf606f29dcdadb0e0aa3e701a076\transformed\jetified-material-ripple-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\6657efd5332b406693d4317d2675637c\transformed\jetified-foundation-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\2837842b8a432f88d9b2b19d54fba2db\transformed\jetified-animation-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\06d94ac6ac0c57026f1ab6b79f591cb7\transformed\jetified-foundation-layout-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\11e99c0aee383daeff04f73087237eb1\transformed\jetified-animation-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\cecdc6b686d4a6ad2b5672b7ef318ff6\transformed\jetified-ui-tooling-data-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\9812f774e6fdc7b4c14aa8d0124fd171\transformed\jetified-ui-unit-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\40db0b4c35c3393a2cdbe5079d587a1a\transformed\jetified-ui-geometry-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\248665b319182ee3725b65a6e5552e26\transformed\jetified-ui-util-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\73e8440218af64ac56365da1b20582ee\transformed\jetified-ui-text-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c5468f57bfb79289450a36b7643dfb41\transformed\jetified-ui-graphics-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\7b1414fed76279a6f6078e1499a9fd41\transformed\jetified-ui-tooling-preview-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.compose.ui:ui-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\ad8f95d1a61f0bc12dfb4101adef2ee7\transformed\jetified-ui-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d9ee32f3fc8384e70db9a8f3e3acdeb1\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\84240613cd88a9d07a4cb7f4383955c6\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3278b61e21f1ae73a9cdfe3fcb92333d\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4fe07a948efe3aed4319cd82a8797bf1\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\RAVO\.gradle\caches\8.13\transforms\1e99b59acb11a1449d15e87c2ad1799a\transformed\fragment-1.3.6\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\18ea03ccfdf49df82a32177eb373f91a\transformed\jetified-activity-1.9.2\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\80b9ec5e2cc676bd00e6c549aa820791\transformed\jetified-activity-ktx-1.9.2\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\04f2d03f2aa8fe7fe8e22d7b9429cfff\transformed\jetified-activity-compose-1.9.2\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\d23d8e65d1f7b116aae8ca8f92a99c13\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\fc8dbf368bdd025acf1c0fe394aa0fc2\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a4199ec7e5adf7280c7a02009ab2a5c7\transformed\transition-1.5.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\079e18a4fc3865e9bcc773068e0e1b17\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\28ce012b0df3c910e0b367dc0bbd8590\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\fe78be579361a83e206bafb5b6b638db\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\3c8e20521ed05e55f6bd4e4c3fbd2963\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4e779ffb5246f8113fda4b8b13a0707d\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\debdb262a47755da8ae9bca8b4ff9805\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a1ce1d200ba281380117e6629fb79c2a\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a1e2e5d5a308af023317c5192971f1d7\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\5964952aa7227a25e2dd9a222f145a38\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\3dbc9ff0a9a5f82dc87dd3288f959d0d\transformed\jetified-emoji2-views-helper-1.3.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5622206378169bfad8633e6bcce0d6f4\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\240ad8631a12fbb924132a7424235bb7\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\9b15ffe861d5a09831444dcee8964d8a\transformed\jetified-lifecycle-livedata-core-ktx-2.8.4\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\59fb17b70388db1eb3d562aa045ccbe7\transformed\lifecycle-livedata-2.8.4\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\caf18fcc5b1ba8545e3899c8c8671b14\transformed\lifecycle-livedata-core-2.8.4\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\28bc5317280820ff64088411b849a350\transformed\lifecycle-viewmodel-2.8.4\AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\0130d7b73b8ab85e4cc992411d36553a\transformed\jetified-lifecycle-viewmodel-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\c1f1ccc8177a2c46395e9ebf544fa888\transformed\jetified-lifecycle-runtime-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\27fa9bc3c167c3e4a371510017d5a207\transformed\jetified-lifecycle-viewmodel-ktx-2.8.4\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\679528c5a4b0f4e827b18d5c70696145\transformed\jetified-lifecycle-runtime-ktx-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\320c12dcc4e91b82e9fa9fda7aeb730b\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.4\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\165a2967352b15d45f80ec248e0eb5aa\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\462a692d46ac4201c874ee3483612807\transformed\jetified-core-ktx-1.13.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d1e8269cdd451e626e07dff77920f97b\transformed\jetified-datastore-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\9aab842424af20f9a036b44ea68bef9f\transformed\jetified-datastore-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3cf37e8e177168efeccd60026667b935\transformed\jetified-datastore-preferences-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\e9da3bcd3e78fa8abeba5b96796acfd4\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\3979ad0a79f58a7274cfb2644963abbe\transformed\jetified-runtime-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\6df877a73a99432fadac5ddb3fc51feb\transformed\jetified-annotation-experimental-1.4.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b18d3c1d162ee5222f2edd7d8338eab1\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\75dda1e63b292d0aeefe09db9a19d6d4\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5e8ae659748ba7ef7b864ebeb1eb2685\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\2353eb61138ac7a3202a21b5ea6c8735\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\1d0bcb6f558a184a1ef794322802e61b\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\66ce4bf9f00013d354fa8e65259ec10e\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b47d89aabd8bdb51328f41838997f53f\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\e26353fadd6f7de4486ba929b0e40b17\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4bd6d1ae3eeb67763209faac1f42bf2a\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
+	package
+		INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:2:11-69
+uses-feature#android.software.live_wallpaper
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:4:5-68
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:4:19-65
+application
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:6:5-37:19
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:6:5-37:19
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\39c815250087554a139986f35a106a74\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\39c815250087554a139986f35a106a74\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d9ee32f3fc8384e70db9a8f3e3acdeb1\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d9ee32f3fc8384e70db9a8f3e3acdeb1\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5e8ae659748ba7ef7b864ebeb1eb2685\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5e8ae659748ba7ef7b864ebeb1eb2685\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:9:9-41
+	android:icon
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:7:9-35
+	android:theme
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:11:9-54
+activity#com.example.batterywallpaper.MainActivity
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:12:9-21:20
+	android:label
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:15:13-45
+	android:exported
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:14:13-36
+	android:theme
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:16:13-58
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:13:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:17:13-20:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:18:17-69
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:18:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:19:17-77
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:19:27-74
+service#com.example.batterywallpaper.wallpaper.BatteryWallpaperService
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:23:9-36:19
+	android:label
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:26:13-45
+	android:exported
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:25:13-36
+	android:permission
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:28:13-67
+	android:description
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:27:13-64
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:24:13-62
+intent-filter#action:name:android.service.wallpaper.WallpaperService
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:29:13-31:29
+action#android.service.wallpaper.WallpaperService
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:30:17-85
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:30:25-82
+meta-data#android.service.wallpaper
+ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:33:13-35:61
+	android:resource
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:35:17-58
+	android:name
+		ADDED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml:34:17-57
+uses-sdk
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\39c815250087554a139986f35a106a74\transformed\material-1.12.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\39c815250087554a139986f35a106a74\transformed\material-1.12.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3982a64fbb9990978e6597d46ab3cfb1\transformed\jetified-material3-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3982a64fbb9990978e6597d46ab3cfb1\transformed\jetified-material3-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c93ad2e97effd1c795ce53425c5dbffc\transformed\jetified-material-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c93ad2e97effd1c795ce53425c5dbffc\transformed\jetified-material-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\d2f7a14ed049cd30d0040abbb8f7b61d\transformed\jetified-material-icons-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\d2f7a14ed049cd30d0040abbb8f7b61d\transformed\jetified-material-icons-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c311bf606f29dcdadb0e0aa3e701a076\transformed\jetified-material-ripple-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c311bf606f29dcdadb0e0aa3e701a076\transformed\jetified-material-ripple-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\6657efd5332b406693d4317d2675637c\transformed\jetified-foundation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\6657efd5332b406693d4317d2675637c\transformed\jetified-foundation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\2837842b8a432f88d9b2b19d54fba2db\transformed\jetified-animation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\2837842b8a432f88d9b2b19d54fba2db\transformed\jetified-animation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\06d94ac6ac0c57026f1ab6b79f591cb7\transformed\jetified-foundation-layout-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\06d94ac6ac0c57026f1ab6b79f591cb7\transformed\jetified-foundation-layout-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\11e99c0aee383daeff04f73087237eb1\transformed\jetified-animation-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\11e99c0aee383daeff04f73087237eb1\transformed\jetified-animation-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\cecdc6b686d4a6ad2b5672b7ef318ff6\transformed\jetified-ui-tooling-data-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\cecdc6b686d4a6ad2b5672b7ef318ff6\transformed\jetified-ui-tooling-data-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\9812f774e6fdc7b4c14aa8d0124fd171\transformed\jetified-ui-unit-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\9812f774e6fdc7b4c14aa8d0124fd171\transformed\jetified-ui-unit-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\40db0b4c35c3393a2cdbe5079d587a1a\transformed\jetified-ui-geometry-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\40db0b4c35c3393a2cdbe5079d587a1a\transformed\jetified-ui-geometry-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\248665b319182ee3725b65a6e5552e26\transformed\jetified-ui-util-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\248665b319182ee3725b65a6e5552e26\transformed\jetified-ui-util-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\73e8440218af64ac56365da1b20582ee\transformed\jetified-ui-text-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\73e8440218af64ac56365da1b20582ee\transformed\jetified-ui-text-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c5468f57bfb79289450a36b7643dfb41\transformed\jetified-ui-graphics-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\c5468f57bfb79289450a36b7643dfb41\transformed\jetified-ui-graphics-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\7b1414fed76279a6f6078e1499a9fd41\transformed\jetified-ui-tooling-preview-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\7b1414fed76279a6f6078e1499a9fd41\transformed\jetified-ui-tooling-preview-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\ad8f95d1a61f0bc12dfb4101adef2ee7\transformed\jetified-ui-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\ad8f95d1a61f0bc12dfb4101adef2ee7\transformed\jetified-ui-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d9ee32f3fc8384e70db9a8f3e3acdeb1\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d9ee32f3fc8384e70db9a8f3e3acdeb1\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\84240613cd88a9d07a4cb7f4383955c6\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\84240613cd88a9d07a4cb7f4383955c6\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3278b61e21f1ae73a9cdfe3fcb92333d\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3278b61e21f1ae73a9cdfe3fcb92333d\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4fe07a948efe3aed4319cd82a8797bf1\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4fe07a948efe3aed4319cd82a8797bf1\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\RAVO\.gradle\caches\8.13\transforms\1e99b59acb11a1449d15e87c2ad1799a\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\RAVO\.gradle\caches\8.13\transforms\1e99b59acb11a1449d15e87c2ad1799a\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\18ea03ccfdf49df82a32177eb373f91a\transformed\jetified-activity-1.9.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\18ea03ccfdf49df82a32177eb373f91a\transformed\jetified-activity-1.9.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\80b9ec5e2cc676bd00e6c549aa820791\transformed\jetified-activity-ktx-1.9.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\80b9ec5e2cc676bd00e6c549aa820791\transformed\jetified-activity-ktx-1.9.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\04f2d03f2aa8fe7fe8e22d7b9429cfff\transformed\jetified-activity-compose-1.9.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.2] C:\Users\RAVO\.gradle\caches\8.13\transforms\04f2d03f2aa8fe7fe8e22d7b9429cfff\transformed\jetified-activity-compose-1.9.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\d23d8e65d1f7b116aae8ca8f92a99c13\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\d23d8e65d1f7b116aae8ca8f92a99c13\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\fc8dbf368bdd025acf1c0fe394aa0fc2\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\fc8dbf368bdd025acf1c0fe394aa0fc2\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a4199ec7e5adf7280c7a02009ab2a5c7\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a4199ec7e5adf7280c7a02009ab2a5c7\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\079e18a4fc3865e9bcc773068e0e1b17\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\079e18a4fc3865e9bcc773068e0e1b17\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\28ce012b0df3c910e0b367dc0bbd8590\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\28ce012b0df3c910e0b367dc0bbd8590\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\fe78be579361a83e206bafb5b6b638db\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\fe78be579361a83e206bafb5b6b638db\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\3c8e20521ed05e55f6bd4e4c3fbd2963\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\3c8e20521ed05e55f6bd4e4c3fbd2963\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4e779ffb5246f8113fda4b8b13a0707d\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4e779ffb5246f8113fda4b8b13a0707d\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\debdb262a47755da8ae9bca8b4ff9805\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\debdb262a47755da8ae9bca8b4ff9805\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a1ce1d200ba281380117e6629fb79c2a\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a1ce1d200ba281380117e6629fb79c2a\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a1e2e5d5a308af023317c5192971f1d7\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\a1e2e5d5a308af023317c5192971f1d7\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\5964952aa7227a25e2dd9a222f145a38\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\5964952aa7227a25e2dd9a222f145a38\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\3dbc9ff0a9a5f82dc87dd3288f959d0d\transformed\jetified-emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\3dbc9ff0a9a5f82dc87dd3288f959d0d\transformed\jetified-emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5622206378169bfad8633e6bcce0d6f4\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5622206378169bfad8633e6bcce0d6f4\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\240ad8631a12fbb924132a7424235bb7\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\240ad8631a12fbb924132a7424235bb7\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\9b15ffe861d5a09831444dcee8964d8a\transformed\jetified-lifecycle-livedata-core-ktx-2.8.4\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\9b15ffe861d5a09831444dcee8964d8a\transformed\jetified-lifecycle-livedata-core-ktx-2.8.4\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\59fb17b70388db1eb3d562aa045ccbe7\transformed\lifecycle-livedata-2.8.4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\59fb17b70388db1eb3d562aa045ccbe7\transformed\lifecycle-livedata-2.8.4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\caf18fcc5b1ba8545e3899c8c8671b14\transformed\lifecycle-livedata-core-2.8.4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\caf18fcc5b1ba8545e3899c8c8671b14\transformed\lifecycle-livedata-core-2.8.4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\28bc5317280820ff64088411b849a350\transformed\lifecycle-viewmodel-2.8.4\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\28bc5317280820ff64088411b849a350\transformed\lifecycle-viewmodel-2.8.4\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\0130d7b73b8ab85e4cc992411d36553a\transformed\jetified-lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\0130d7b73b8ab85e4cc992411d36553a\transformed\jetified-lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\c1f1ccc8177a2c46395e9ebf544fa888\transformed\jetified-lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\c1f1ccc8177a2c46395e9ebf544fa888\transformed\jetified-lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\27fa9bc3c167c3e4a371510017d5a207\transformed\jetified-lifecycle-viewmodel-ktx-2.8.4\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\27fa9bc3c167c3e4a371510017d5a207\transformed\jetified-lifecycle-viewmodel-ktx-2.8.4\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\679528c5a4b0f4e827b18d5c70696145\transformed\jetified-lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\679528c5a4b0f4e827b18d5c70696145\transformed\jetified-lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\320c12dcc4e91b82e9fa9fda7aeb730b\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\320c12dcc4e91b82e9fa9fda7aeb730b\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\165a2967352b15d45f80ec248e0eb5aa\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\165a2967352b15d45f80ec248e0eb5aa\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\462a692d46ac4201c874ee3483612807\transformed\jetified-core-ktx-1.13.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\462a692d46ac4201c874ee3483612807\transformed\jetified-core-ktx-1.13.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d1e8269cdd451e626e07dff77920f97b\transformed\jetified-datastore-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\d1e8269cdd451e626e07dff77920f97b\transformed\jetified-datastore-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\9aab842424af20f9a036b44ea68bef9f\transformed\jetified-datastore-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\9aab842424af20f9a036b44ea68bef9f\transformed\jetified-datastore-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3cf37e8e177168efeccd60026667b935\transformed\jetified-datastore-preferences-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\3cf37e8e177168efeccd60026667b935\transformed\jetified-datastore-preferences-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\e9da3bcd3e78fa8abeba5b96796acfd4\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\e9da3bcd3e78fa8abeba5b96796acfd4\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\3979ad0a79f58a7274cfb2644963abbe\transformed\jetified-runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\3979ad0a79f58a7274cfb2644963abbe\transformed\jetified-runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\6df877a73a99432fadac5ddb3fc51feb\transformed\jetified-annotation-experimental-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\6df877a73a99432fadac5ddb3fc51feb\transformed\jetified-annotation-experimental-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b18d3c1d162ee5222f2edd7d8338eab1\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b18d3c1d162ee5222f2edd7d8338eab1\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\75dda1e63b292d0aeefe09db9a19d6d4\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\75dda1e63b292d0aeefe09db9a19d6d4\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5e8ae659748ba7ef7b864ebeb1eb2685\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\5e8ae659748ba7ef7b864ebeb1eb2685\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\2353eb61138ac7a3202a21b5ea6c8735\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\2353eb61138ac7a3202a21b5ea6c8735\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\1d0bcb6f558a184a1ef794322802e61b\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\1d0bcb6f558a184a1ef794322802e61b\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\66ce4bf9f00013d354fa8e65259ec10e\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\66ce4bf9f00013d354fa8e65259ec10e\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b47d89aabd8bdb51328f41838997f53f\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b47d89aabd8bdb51328f41838997f53f\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\e26353fadd6f7de4486ba929b0e40b17\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\e26353fadd6f7de4486ba929b0e40b17\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4bd6d1ae3eeb67763209faac1f42bf2a\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\4bd6d1ae3eeb67763209faac1f42bf2a\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+	android:targetSdkVersion
+		INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\RAVO\AndroidStudioProjects\super-garbanzo\app\src\main\AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\f12b76df51a5a81d3b00ad0a7a4d9d8e\transformed\jetified-ui-tooling-release\AndroidManifest.xml:24:13-71
+activity#androidx.activity.ComponentActivity
+ADDED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.6.8] C:\Users\RAVO\.gradle\caches\8.13\transforms\92a636a5f3c242a967898cfd2b270e63\transformed\jetified-ui-test-manifest-1.6.8\AndroidManifest.xml:24:13-63
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\94863aac5b1ab376155ff827ad867ee9\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\RAVO\.gradle\caches\8.13\transforms\b3d6925a06ca646811dd52fee2718f01\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+permission#com.example.batterywallpaper.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+uses-permission#com.example.batterywallpaper.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\feef933582036c0177c29b89d397034c\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\RAVO\.gradle\caches\8.13\transforms\3e86e2ea87d1c400f28ee8631bc18937\transformed\jetified-lifecycle-process-2.8.4\AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\RAVO\.gradle\caches\8.13\transforms\8119bcce93f936edc1ebc5e3bd9078a3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92

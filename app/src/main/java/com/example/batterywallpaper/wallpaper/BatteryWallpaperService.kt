@@ -166,8 +166,6 @@ class BatteryWallpaperService : WallpaperService() {
             }
             canvas.drawPath(capPath, outlinePaint)
 
-            fillPaint.color = wallpaperSettings.batteryColor
-
             val innerPadding = outlinePaint.strokeWidth * 3f
             val fillWidth = (batteryWidth - innerPadding * 2) * (batteryLevel / 100f)
             val fillHeight = batteryHeight - innerPadding * 2
@@ -199,8 +197,9 @@ class BatteryWallpaperService : WallpaperService() {
             val textTargetWidth = batteryWidth * 0.7f // 1 - (2 * 0.15)
             textPaint.textSize = getTextSizeForWidth(textPaint, label, textTargetWidth)
 
-            val textX = batteryBounds.centerX() - textPaint.measureText(label) / 2f
-            val textY = batteryBounds.centerY() + textPaint.textSize / 2f
+            val textWidth = textPaint.measureText(label)
+            val textX = batteryBounds.centerX() - textWidth / 2f
+            val textY = batteryBounds.centerY() + textPaint.textSize / 2f + wobbleOffset
             val textWobble = outlinePaint.strokeWidth * 0.2f * wallpaperSettings.animationLevel
             canvas.drawText(label, textX + random.nextFloat() * textWobble, textY + random.nextFloat() * textWobble, textPaint)
         }
