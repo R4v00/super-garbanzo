@@ -135,7 +135,7 @@ class BatteryWallpaperService : WallpaperService() {
             val originX = (width - batteryWidth) / 2f
             val originY = (height - batteryHeight) / 2f
 
-            outlinePaint.strokeWidth = batteryWidth * 0.02f
+            outlinePaint.strokeWidth = (width * 0.02f) * wallpaperSettings.batterySize
             outlinePaint.alpha = 255
             batteryBounds.set(originX, originY, originX + batteryWidth, originY + batteryHeight)
 

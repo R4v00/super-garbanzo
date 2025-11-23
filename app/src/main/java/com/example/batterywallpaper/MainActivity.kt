@@ -12,38 +12,25 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextMeasurer
@@ -53,6 +40,8 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import com.example.batterywallpaper.data.WallpaperSettings
 import com.example.batterywallpaper.data.WallpaperSettingsRepository
 import com.example.batterywallpaper.ui.theme.BatteryAmber
 import com.example.batterywallpaper.ui.theme.BatteryGreen
@@ -84,12 +73,29 @@ private fun SettingsScreen() {
     val settingsRepository = remember { WallpaperSettingsRepository(context) }
     val settings by settingsRepository.wallpaperSettings.collectAsState(initial = null)
 
+    var showBatteryColorPicker by remember { mutableStateOf(false) }
+    var showBackgroundColorPicker by remember { mutableStateOf(false) }
+
+    if (showBatteryColorPicker) {
+        ColorPickerDialog(
+            onColorSelected = { scope.launch { settingsRepository.setBatteryColor(it.toArgb()) } },
+            onDismiss = { showBatteryColorPicker = false }
+        )
+    }
+
+    if (showBackgroundColorPicker) {
+        ColorPickerDialog(
+            onColorSelected = { scope.launch { settingsRepository.setBackgroundColor(it.toArgb()) } },
+            onDismiss = { showBackgroundColorPicker = false }
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -98,7 +104,6 @@ private fun SettingsScreen() {
             color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
-        Spacer(Modifier.height(24.dp))
 
         SketchyBatteryPreview(
             batteryLevel = animatedLevel,
@@ -106,8 +111,6 @@ private fun SettingsScreen() {
             textMeasurer = textMeasurer,
             settings = settings
         )
-
-        Spacer(Modifier.height(24.dp))
 
         settings?.let { currentSettings ->
             SettingSlider(
@@ -122,17 +125,14 @@ private fun SettingsScreen() {
             )
         }
 
-        // Color pickers - you can implement these
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            Button(onClick = { /* TODO: Implement battery color picker */ }) {
+            Button(onClick = { showBatteryColorPicker = true }) {
                 Text("Battery Color")
             }
-            Button(onClick = { /* TODO: Implement background color picker */ }) {
+            Button(onClick = { showBackgroundColorPicker = true }) {
                 Text("Background Color")
             }
         }
-
-        Spacer(Modifier.height(24.dp))
 
         Button(onClick = {
             scope.launch { launchWallpaperSettings(context) }
@@ -146,7 +146,37 @@ private fun SettingsScreen() {
 private fun SettingSlider(label: String, value: Float, onValueChange: (Float) -> Unit) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Text(text = label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface)
-        Slider(value = value, onValueChange = onValueChange)
+        Slider(value = value, onValueChange = onValueChange, modifier = Modifier.fillMaxWidth())
+    }
+}
+
+@Composable
+private fun ColorPickerDialog(onColorSelected: (Color) -> Unit, onDismiss: () -> Unit) {
+    val colors = listOf(
+        Color.White, Color.Black, Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Cyan, Color.Magenta,
+        Color(0xFFFFA500), Color(0xFF800080), Color(0xFF008000), Color(0xFF000080)
+    )
+
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(shape = RoundedCornerShape(16.dp)) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text("Select a Color", style = MaterialTheme.typography.headlineSmall)
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 48.dp)) {
+                    items(colors) { color ->
+                        Box(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .size(48.dp)
+                                .clip(CircleShape)
+                                .background(color)
+                                .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), CircleShape)
+                                .clickable { onColorSelected(color); onDismiss() }
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -197,7 +227,7 @@ private fun SketchyBatteryPreview(
     modifier: Modifier = Modifier,
     batteryLevel: Float,
     textMeasurer: TextMeasurer,
-    settings: com.example.batterywallpaper.data.WallpaperSettings?
+    settings: WallpaperSettings?
 ) {
     val gaugeColor = settings?.batteryColor?.let { Color(it) } ?: when {
         batteryLevel <= 0.1f -> BatteryRed
@@ -208,16 +238,15 @@ private fun SketchyBatteryPreview(
     val backgroundColor = settings?.backgroundColor?.let { Color(it) } ?: MaterialTheme.colorScheme.background
 
     Canvas(modifier = modifier.background(backgroundColor)) {
-        scale(settings?.batterySize ?: 1f) {
-            drawSketchyBattery(
-                level = batteryLevel,
-                gaugeColor = gaugeColor,
-                strokeColor = strokeColor,
-                random = Random(System.currentTimeMillis()),
-                textMeasurer = textMeasurer,
-                animationLevel = settings?.animationLevel ?: 1f
-            )
-        }
+        drawSketchyBattery(
+            level = batteryLevel,
+            gaugeColor = gaugeColor,
+            strokeColor = strokeColor,
+            random = Random(System.currentTimeMillis()),
+            textMeasurer = textMeasurer,
+            animationLevel = settings?.animationLevel ?: 1f,
+            batterySize = settings?.batterySize ?: 1f
+        )
     }
 }
 
@@ -227,12 +256,13 @@ private fun DrawScope.drawSketchyBattery(
     strokeColor: Color,
     random: Random,
     textMeasurer: TextMeasurer,
-    animationLevel: Float
+    animationLevel: Float,
+    batterySize: Float
 ) {
-    val width = size.width * 0.7f
-    val height = size.height * 0.35f
+    val width = size.width * 0.7f * batterySize
+    val height = size.height * 0.35f * batterySize
     val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
-    val strokeWidth = width * 0.025f
+    val strokeWidth = (size.width * 0.025f) * batterySize
 
     fun Path.sketchyRect() {
         val wobble = strokeWidth * 0.8f * animationLevel
