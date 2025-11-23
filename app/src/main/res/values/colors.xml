@@ -1,0 +1,10 @@
+<resources>
+    <color name="md_theme_primary">#4CAF50</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_background">#101010</color>
+    <color name="md_theme_surface">#1A1A1A</color>
+    <color name="md_theme_on_surface">#EAEAEA</color>
+    <color name="battery_green">#4CAF50</color>
+    <color name="battery_amber">#FFB300</color>
+    <color name="battery_red">#E53935</color>
+</resources>
