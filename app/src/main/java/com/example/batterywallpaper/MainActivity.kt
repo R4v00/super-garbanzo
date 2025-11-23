@@ -14,17 +14,21 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,8 +40,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextMeasurer
@@ -47,6 +53,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.batterywallpaper.data.WallpaperSettingsRepository
 import com.example.batterywallpaper.ui.theme.BatteryAmber
 import com.example.batterywallpaper.ui.theme.BatteryGreen
 import com.example.batterywallpaper.ui.theme.BatteryRed
@@ -61,19 +68,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BatteryWallpaperTheme {
-                PreviewScreen()
+                SettingsScreen()
             }
         }
     }
 }
 
 @Composable
-private fun PreviewScreen() {
+private fun SettingsScreen() {
     val context = LocalContext.current
     val batteryLevel by rememberBatteryLevel(context)
     val animatedLevel by animateFloatAsState(targetValue = batteryLevel / 100f, label = "battery")
     val scope = rememberCoroutineScope()
     val textMeasurer = rememberTextMeasurer()
+    val settingsRepository = remember { WallpaperSettingsRepository(context) }
+    val settings by settingsRepository.wallpaperSettings.collectAsState(initial = null)
 
     Column(
         modifier = Modifier
@@ -84,30 +93,60 @@ private fun PreviewScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Wallpaper Preview",
+            text = "Wallpaper Settings",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
-        Spacer(Modifier.height(12.dp))
-        Text(
-            text = "This is a preview of the battery wallpaper.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-            textAlign = TextAlign.Center
-        )
         Spacer(Modifier.height(24.dp))
+
         SketchyBatteryPreview(
             batteryLevel = animatedLevel,
             modifier = Modifier.size(220.dp),
-            textMeasurer = textMeasurer
+            textMeasurer = textMeasurer,
+            settings = settings
         )
+
         Spacer(Modifier.height(24.dp))
+
+        settings?.let { currentSettings ->
+            SettingSlider(
+                label = "Animation Level",
+                value = currentSettings.animationLevel,
+                onValueChange = { scope.launch { settingsRepository.setAnimationLevel(it) } }
+            )
+            SettingSlider(
+                label = "Battery Size",
+                value = currentSettings.batterySize,
+                onValueChange = { scope.launch { settingsRepository.setBatterySize(it) } }
+            )
+        }
+
+        // Color pickers - you can implement these
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(onClick = { /* TODO: Implement battery color picker */ }) {
+                Text("Battery Color")
+            }
+            Button(onClick = { /* TODO: Implement background color picker */ }) {
+                Text("Background Color")
+            }
+        }
+
+        Spacer(Modifier.height(24.dp))
+
         Button(onClick = {
             scope.launch { launchWallpaperSettings(context) }
         }, shape = RoundedCornerShape(20.dp)) {
             Text(text = "Set as Live Wallpaper")
         }
+    }
+}
+
+@Composable
+private fun SettingSlider(label: String, value: Float, onValueChange: (Float) -> Unit) {
+    Column(modifier = Modifier.padding(vertical = 8.dp)) {
+        Text(text = label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface)
+        Slider(value = value, onValueChange = onValueChange)
     }
 }
 
@@ -157,23 +196,28 @@ private fun Intent.extractBatteryLevel(): Float {
 private fun SketchyBatteryPreview(
     modifier: Modifier = Modifier,
     batteryLevel: Float,
-    textMeasurer: TextMeasurer
+    textMeasurer: TextMeasurer,
+    settings: com.example.batterywallpaper.data.WallpaperSettings?
 ) {
-    val gaugeColor = when {
+    val gaugeColor = settings?.batteryColor?.let { Color(it) } ?: when {
         batteryLevel <= 0.1f -> BatteryRed
         batteryLevel <= 0.2f -> BatteryAmber
         else -> BatteryGreen
     }
     val strokeColor = MaterialTheme.colorScheme.onSurface
+    val backgroundColor = settings?.backgroundColor?.let { Color(it) } ?: MaterialTheme.colorScheme.background
 
-    Canvas(modifier = modifier) {
-        drawSketchyBattery(
-            level = batteryLevel,
-            gaugeColor = gaugeColor,
-            strokeColor = strokeColor,
-            random = Random(System.currentTimeMillis()),
-            textMeasurer = textMeasurer
-        )
+    Canvas(modifier = modifier.background(backgroundColor)) {
+        scale(settings?.batterySize ?: 1f) {
+            drawSketchyBattery(
+                level = batteryLevel,
+                gaugeColor = gaugeColor,
+                strokeColor = strokeColor,
+                random = Random(System.currentTimeMillis()),
+                textMeasurer = textMeasurer,
+                animationLevel = settings?.animationLevel ?: 1f
+            )
+        }
     }
 }
 
@@ -182,7 +226,8 @@ private fun DrawScope.drawSketchyBattery(
     gaugeColor: Color,
     strokeColor: Color,
     random: Random,
-    textMeasurer: TextMeasurer
+    textMeasurer: TextMeasurer,
+    animationLevel: Float
 ) {
     val width = size.width * 0.7f
     val height = size.height * 0.35f
@@ -190,7 +235,7 @@ private fun DrawScope.drawSketchyBattery(
     val strokeWidth = width * 0.025f
 
     fun Path.sketchyRect() {
-        val wobble = strokeWidth * 0.8f
+        val wobble = strokeWidth * 0.8f * animationLevel
         moveTo(origin.x + random.nextFloat() * wobble, origin.y + random.nextFloat() * wobble)
         lineTo(origin.x + width + random.nextFloat() * wobble, origin.y + random.nextFloat() * wobble)
         lineTo(origin.x + width + random.nextFloat() * wobble, origin.y + height + random.nextFloat() * wobble)
@@ -209,7 +254,7 @@ private fun DrawScope.drawSketchyBattery(
     val capHeight = height * 0.25f
     translate(left = origin.x + width, top = origin.y + (height - capHeight) / 2f) {
         val capPath = Path().apply {
-            val wobble = strokeWidth * 0.6f
+            val wobble = strokeWidth * 0.6f * animationLevel
             moveTo(random.nextFloat() * wobble, random.nextFloat() * wobble)
             lineTo(capWidth + random.nextFloat() * wobble, random.nextFloat() * wobble)
             lineTo(capWidth + random.nextFloat() * wobble, capHeight + random.nextFloat() * wobble)
@@ -233,7 +278,7 @@ private fun DrawScope.drawSketchyBattery(
     val spacing = fillHeight / (tickCount + 1)
     repeat(tickCount) { index ->
         val tickY = origin.y + innerPadding + spacing * (index + 1)
-        val tickLength = width * 0.05f + random.nextFloat() * strokeWidth
+        val tickLength = width * 0.05f + random.nextFloat() * strokeWidth * animationLevel
         drawLine(
             color = strokeColor.copy(alpha = 0.6f),
             start = Offset(origin.x + innerPadding, tickY),

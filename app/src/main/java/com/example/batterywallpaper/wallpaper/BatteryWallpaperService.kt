@@ -16,6 +16,13 @@ import android.os.Looper
 import android.os.SystemClock
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
+import com.example.batterywallpaper.data.WallpaperSettingsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
@@ -50,6 +57,10 @@ class BatteryWallpaperService : WallpaperService() {
             }
         }
 
+        private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+        private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
+        private var wallpaperSettings = com.example.batterywallpaper.data.WallpaperSettings(1f, 1f, 0, 0)
+
         private val batteryReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 intent ?: return
@@ -65,12 +76,18 @@ class BatteryWallpaperService : WallpaperService() {
             super.onCreate(surfaceHolder)
             setTouchEventsEnabled(false)
             registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            wallpaperScope.launch {
+                settingsRepository.wallpaperSettings.collect { settings ->
+                    wallpaperSettings = settings
+                }
+            }
         }
 
         override fun onDestroy() {
             super.onDestroy()
             unregisterReceiver(batteryReceiver)
             handler.removeCallbacks(drawRunnable)
+            wallpaperScope.coroutineContext.cancelChildren()
         }
 
         override fun onVisibilityChanged(visible: Boolean) {
@@ -101,7 +118,7 @@ class BatteryWallpaperService : WallpaperService() {
             if (canvas != null) {
                 try {
                     canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-                    canvas.drawColor(Color.parseColor("#101010"))
+                    canvas.drawColor(wallpaperSettings.backgroundColor)
                     drawBattery(canvas)
                 } finally {
                     holder.unlockCanvasAndPost(canvas)
@@ -113,8 +130,8 @@ class BatteryWallpaperService : WallpaperService() {
         private fun drawBattery(canvas: Canvas) {
             val width = canvas.width.toFloat()
             val height = canvas.height.toFloat()
-            val batteryWidth = width * 0.6f
-            val batteryHeight = height * 0.3f
+            val batteryWidth = width * 0.6f * wallpaperSettings.batterySize
+            val batteryHeight = height * 0.3f * wallpaperSettings.batterySize
             val originX = (width - batteryWidth) / 2f
             val originY = (height - batteryHeight) / 2f
 
@@ -122,7 +139,7 @@ class BatteryWallpaperService : WallpaperService() {
             outlinePaint.alpha = 255
             batteryBounds.set(originX, originY, originX + batteryWidth, originY + batteryHeight)
 
-            val wobble = outlinePaint.strokeWidth * 1.2f
+            val wobble = outlinePaint.strokeWidth * 1.2f * wallpaperSettings.animationLevel
             val path = Path().apply {
                 moveTo(batteryBounds.left + random.nextFloat() * wobble, batteryBounds.top + random.nextFloat() * wobble)
                 lineTo(batteryBounds.right + random.nextFloat() * wobble, batteryBounds.top + random.nextFloat() * wobble)
@@ -155,17 +172,12 @@ class BatteryWallpaperService : WallpaperService() {
             }
             canvas.drawPath(capPath, outlinePaint)
 
-            val gaugeColor = when {
-                batteryLevel <= 10f -> Color.parseColor("#E53935")
-                batteryLevel <= 20f -> Color.parseColor("#FFB300")
-                else -> Color.parseColor("#4CAF50")
-            }
-            fillPaint.color = gaugeColor
+            fillPaint.color = wallpaperSettings.batteryColor
 
             val innerPadding = outlinePaint.strokeWidth * 3f
             val fillWidth = (batteryWidth - innerPadding * 2) * (batteryLevel / 100f)
             val fillHeight = batteryHeight - innerPadding * 2
-            val wobbleOffset = sin(nowSeconds() * 2f) * outlinePaint.strokeWidth
+            val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.animationLevel) * outlinePaint.strokeWidth
             val fillRect = RectF(
                 batteryBounds.left + innerPadding,
                 batteryBounds.top + innerPadding + wobbleOffset,
@@ -177,7 +189,7 @@ class BatteryWallpaperService : WallpaperService() {
             val tickCount = 4
             val spacing = fillHeight / (tickCount + 1)
             repeat(tickCount) { index ->
-                val y = batteryBounds.top + innerPadding + spacing * (index + 1) + cos(nowSeconds() * 3 + index) * 1.5f
+                val y = batteryBounds.top + innerPadding + spacing * (index + 1) + cos(nowSeconds() * 3 * wallpaperSettings.animationLevel + index) * 1.5f
                 canvas.drawLine(
                     batteryBounds.left + innerPadding,
                     y,
