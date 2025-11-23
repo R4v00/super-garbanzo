@@ -32,7 +32,7 @@ class WallpaperSettingsRepository(private val context: Context) {
                 animationLevel = it[KEY_ANIMATION_LEVEL] ?: 1f,
                 batteryWidth = it[KEY_BATTERY_WIDTH] ?: 0.6f,
                 batteryHeight = it[KEY_BATTERY_HEIGHT] ?: 0.3f,
-                batteryColor = it[KEY_BATTERY_COLOR] ?: Color.Green.hashCode(),
+                batteryColor = it[KEY_BATTERY_COLOR] ?: 0,
                 backgroundColor = it[KEY_BACKGROUND_COLOR] ?: Color.Black.hashCode(),
                 textColor = it[KEY_TEXT_COLOR] ?: Color.White.hashCode(),
                 edgesColor = it[KEY_EDGES_COLOR] ?: Color.White.hashCode(),

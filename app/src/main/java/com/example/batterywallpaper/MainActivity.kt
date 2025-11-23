@@ -264,10 +264,20 @@ private fun SketchyBatteryPreview(
     textMeasurer: TextMeasurer,
     settings: WallpaperSettings?
 ) {
-    val gaugeColor = settings?.batteryColor?.let { Color(it) } ?: when {
-        batteryLevel <= 0.1f -> BatteryRed
-        batteryLevel <= 0.2f -> BatteryAmber
-        else -> BatteryGreen
+    val gaugeColor = settings?.batteryColor?.let { color ->
+        if (color == 0) {
+            when {
+                batteryLevel <= 0.11f -> Color.Red
+                batteryLevel <= 0.2f -> Color.Yellow
+                else -> Color.Green
+            }
+        } else {
+            Color(color)
+        }
+    } ?: when {
+        batteryLevel <= 0.11f -> Color.Red
+        batteryLevel <= 0.2f -> Color.Yellow
+        else -> Color.Green
     }
     val strokeColor = settings?.edgesColor?.let { Color(it) } ?: MaterialTheme.colorScheme.onSurface
     val backgroundColor = settings?.backgroundColor?.let { Color(it) } ?: MaterialTheme.colorScheme.background
@@ -348,23 +358,11 @@ private fun DrawScope.drawSketchyBattery(
         cornerRadius = androidx.compose.ui.geometry.CornerRadius(strokeWidth * 2, strokeWidth * 2)
     )
 
-    val tickCount = 4
-    val spacing = fillHeight / (tickCount + 1)
-    repeat(tickCount) { index ->
-        val tickY = origin.y + innerPadding + spacing * (index + 1)
-        val tickLength = width * 0.05f + random.nextFloat() * strokeWidth * animationLevel
-        drawLine(
-            color = strokeColor.copy(alpha = 0.6f),
-            start = Offset(origin.x + innerPadding, tickY),
-            end = Offset(origin.x + innerPadding + tickLength, tickY),
-            strokeWidth = strokeWidth * 0.8f
-        )
-    }
-
     val label = "${(level * 100).roundToInt()}%"
     val textStyle = TextStyle(
         color = textColor,
-        fontSize = (height * textSize).sp
+        fontSize = (height * textSize).sp,
+        textAlign = TextAlign.Center
     )
     val textLayoutResult = textMeasurer.measure(label, style = textStyle)
     val textWobble = strokeWidth * 0.2f * animationLevel
