@@ -75,6 +75,8 @@ private fun SettingsScreen() {
 
     var showBatteryColorPicker by remember { mutableStateOf(false) }
     var showBackgroundColorPicker by remember { mutableStateOf(false) }
+    var showTextColorPicker by remember { mutableStateOf(false) }
+    var showEdgesColorPicker by remember { mutableStateOf(false) }
 
     if (showBatteryColorPicker) {
         ColorPickerDialog(
@@ -87,6 +89,20 @@ private fun SettingsScreen() {
         ColorPickerDialog(
             onColorSelected = { scope.launch { settingsRepository.setBackgroundColor(it.toArgb()) } },
             onDismiss = { showBackgroundColorPicker = false }
+        )
+    }
+
+    if (showTextColorPicker) {
+        ColorPickerDialog(
+            onColorSelected = { scope.launch { settingsRepository.setTextColor(it.toArgb()) } },
+            onDismiss = { showTextColorPicker = false }
+        )
+    }
+
+    if (showEdgesColorPicker) {
+        ColorPickerDialog(
+            onColorSelected = { scope.launch { settingsRepository.setEdgesColor(it.toArgb()) } },
+            onDismiss = { showEdgesColorPicker = false }
         )
     }
 
@@ -136,6 +152,14 @@ private fun SettingsScreen() {
             }
             Button(onClick = { showBackgroundColorPicker = true }) {
                 Text("Background Color")
+            }
+        }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(onClick = { showTextColorPicker = true }) {
+                Text("Text Color")
+            }
+            Button(onClick = { showEdgesColorPicker = true }) {
+                Text("Edges Color")
             }
         }
 
@@ -239,14 +263,16 @@ private fun SketchyBatteryPreview(
         batteryLevel <= 0.2f -> BatteryAmber
         else -> BatteryGreen
     }
-    val strokeColor = MaterialTheme.colorScheme.onSurface
+    val strokeColor = settings?.edgesColor?.let { Color(it) } ?: MaterialTheme.colorScheme.onSurface
     val backgroundColor = settings?.backgroundColor?.let { Color(it) } ?: MaterialTheme.colorScheme.background
+    val textColor = settings?.textColor?.let { Color(it) } ?: MaterialTheme.colorScheme.onSurface
 
     Canvas(modifier = modifier.background(backgroundColor)) {
         drawSketchyBattery(
             level = batteryLevel,
             gaugeColor = gaugeColor,
             strokeColor = strokeColor,
+            textColor = textColor,
             random = Random(System.currentTimeMillis()),
             textMeasurer = textMeasurer,
             animationLevel = settings?.animationLevel ?: 1f,
@@ -260,6 +286,7 @@ private fun DrawScope.drawSketchyBattery(
     level: Float,
     gaugeColor: Color,
     strokeColor: Color,
+    textColor: Color,
     random: Random,
     textMeasurer: TextMeasurer,
     animationLevel: Float,
@@ -328,7 +355,7 @@ private fun DrawScope.drawSketchyBattery(
     val textLayoutResult = textMeasurer.measure(
         label,
         style = TextStyle(
-            color = strokeColor,
+            color = textColor,
             fontSize = (height * 0.3f).sp
         )
     )
