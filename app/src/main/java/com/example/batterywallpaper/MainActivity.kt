@@ -40,12 +40,18 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.batterywallpaper.ui.theme.BatteryAmber
 import com.example.batterywallpaper.ui.theme.BatteryGreen
 import com.example.batterywallpaper.ui.theme.BatteryRed
 import com.example.batterywallpaper.ui.theme.BatteryWallpaperTheme
+import com.example.batterywallpaper.wallpaper.BatteryWallpaperService
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -67,6 +73,7 @@ private fun PreviewScreen() {
     val batteryLevel by rememberBatteryLevel(context)
     val animatedLevel by animateFloatAsState(targetValue = batteryLevel / 100f, label = "battery")
     val scope = rememberCoroutineScope()
+    val textMeasurer = rememberTextMeasurer()
 
     Column(
         modifier = Modifier
@@ -77,14 +84,14 @@ private fun PreviewScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = context.getString(R.string.wallpaper_title),
+            text = "Wallpaper Preview",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(12.dp))
         Text(
-            text = context.getString(R.string.wallpaper_info),
+            text = "This is a preview of the battery wallpaper.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
             textAlign = TextAlign.Center
@@ -92,13 +99,14 @@ private fun PreviewScreen() {
         Spacer(Modifier.height(24.dp))
         SketchyBatteryPreview(
             batteryLevel = animatedLevel,
-            modifier = Modifier.size(220.dp)
+            modifier = Modifier.size(220.dp),
+            textMeasurer = textMeasurer
         )
         Spacer(Modifier.height(24.dp))
         Button(onClick = {
             scope.launch { launchWallpaperSettings(context) }
         }, shape = RoundedCornerShape(20.dp)) {
-            Text(text = context.getString(R.string.wallpaper_cta))
+            Text(text = "Set as Live Wallpaper")
         }
     }
 }
@@ -107,7 +115,7 @@ private suspend fun launchWallpaperSettings(context: Context) {
     val intent = Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER).apply {
         putExtra(
             WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-            android.content.ComponentName(context, wallpaper.BatteryWallpaperService::class.java)
+            android.content.ComponentName(context, BatteryWallpaperService::class.java)
         )
     }
     val chooserIntent = Intent(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER)
@@ -146,19 +154,25 @@ private fun Intent.extractBatteryLevel(): Float {
 }
 
 @Composable
-private fun SketchyBatteryPreview(modifier: Modifier = Modifier, batteryLevel: Float) {
+private fun SketchyBatteryPreview(
+    modifier: Modifier = Modifier,
+    batteryLevel: Float,
+    textMeasurer: TextMeasurer
+) {
     val gaugeColor = when {
         batteryLevel <= 0.1f -> BatteryRed
         batteryLevel <= 0.2f -> BatteryAmber
         else -> BatteryGreen
     }
+    val strokeColor = MaterialTheme.colorScheme.onSurface
 
     Canvas(modifier = modifier) {
         drawSketchyBattery(
             level = batteryLevel,
             gaugeColor = gaugeColor,
-            strokeColor = MaterialTheme.colorScheme.onSurface,
-            random = Random(System.currentTimeMillis())
+            strokeColor = strokeColor,
+            random = Random(System.currentTimeMillis()),
+            textMeasurer = textMeasurer
         )
     }
 }
@@ -167,7 +181,8 @@ private fun DrawScope.drawSketchyBattery(
     level: Float,
     gaugeColor: Color,
     strokeColor: Color,
-    random: Random
+    random: Random,
+    textMeasurer: TextMeasurer
 ) {
     val width = size.width * 0.7f
     val height = size.height * 0.35f
@@ -228,14 +243,19 @@ private fun DrawScope.drawSketchyBattery(
     }
 
     val label = "${(level * 100).roundToInt()}%"
-    drawContext.canvas.nativeCanvas.apply {
-        val paint = android.graphics.Paint().apply {
-            color = android.graphics.Color.WHITE
-            textSize = height * 0.3f
-            isAntiAlias = true
-            style = android.graphics.Paint.Style.FILL
-        }
-        val textWidth = paint.measureText(label)
-        drawText(label, origin.x + (width - textWidth) / 2f, origin.y + height + paint.textSize, paint)
-    }
+    val textLayoutResult = textMeasurer.measure(
+        label,
+        style = TextStyle(
+            color = strokeColor,
+            fontSize = (height * 0.3f).sp
+        )
+    )
+
+    drawText(
+        textLayoutResult,
+        topLeft = Offset(
+            x = origin.x + (width - textLayoutResult.size.width) / 2f,
+            y = origin.y + (height - textLayoutResult.size.height) / 2f
+        )
+    )
 }
