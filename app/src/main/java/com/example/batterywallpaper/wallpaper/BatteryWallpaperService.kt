@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Canvas
+import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PorterDuff
@@ -29,6 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.math.roundToInt
 import kotlin.math.sin
+import kotlin.random.Random
 
 class BatteryWallpaperService : WallpaperService() {
     override fun onCreateEngine(): Engine = BatteryEngine()
@@ -53,6 +55,8 @@ class BatteryWallpaperService : WallpaperService() {
         private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
         private var wallpaperSettings: WallpaperSettings
+
+        private val random = Random(System.currentTimeMillis())
 
         init {
             wallpaperSettings = runBlocking {
@@ -152,9 +156,20 @@ class BatteryWallpaperService : WallpaperService() {
             outlinePaint.strokeWidth = strokeWidth
             outlinePaint.color = wallpaperSettings.edgesColor
 
-            // --- Draw clean battery outline --- //
+            // --- Draw cartoonish battery outline --- //
+            val animationLevel = wallpaperSettings.animationLevel
+            val wobble = strokeWidth * 1.2f * animationLevel
+            val cornerRadius = batteryWidth * 0.1f
+            outlinePaint.pathEffect = CornerPathEffect(cornerRadius)
+
+            fun r(w: Float): Float = (random.nextFloat() - 0.5f) * w * 2f
+
             val bodyPath = Path().apply {
-                addRect(originX, originY, originX + batteryWidth, originY + batteryHeight, Path.Direction.CW)
+                moveTo(originX + r(wobble), originY + r(wobble))
+                lineTo(originX + batteryWidth + r(wobble), originY + r(wobble))
+                lineTo(originX + batteryWidth + r(wobble), originY + batteryHeight + r(wobble))
+                lineTo(originX + r(wobble), originY + batteryHeight + r(wobble))
+                close()
             }
             canvas.drawPath(bodyPath, outlinePaint)
 
@@ -163,9 +178,14 @@ class BatteryWallpaperService : WallpaperService() {
             val capPath = Path().apply {
                 val capOriginX = originX + batteryWidth
                 val capOriginY = originY + (batteryHeight - capHeight) / 2f
-                addRect(capOriginX, capOriginY, capOriginX + capWidth, capOriginY + capHeight, Path.Direction.CW)
+                moveTo(capOriginX + r(wobble), capOriginY + r(wobble))
+                lineTo(capOriginX + capWidth + r(wobble), capOriginY + r(wobble))
+                lineTo(capOriginX + capWidth + r(wobble), capOriginY + capHeight + r(wobble))
+                lineTo(capOriginX + r(wobble), capOriginY + capHeight + r(wobble))
+                close()
             }
             canvas.drawPath(capPath, outlinePaint)
+            outlinePaint.pathEffect = null
             // --- End drawing clean outline --- //
 
             val batteryPercent = batteryLevel / 100f
@@ -192,7 +212,7 @@ class BatteryWallpaperService : WallpaperService() {
                     originX + innerPadding + fillWidth,
                     originY + innerPadding + fillHeight + wobbleOffset
                 )
-                canvas.drawRoundRect(fillRect, strokeWidth, strokeWidth, fillPaint)
+                canvas.drawRoundRect(fillRect, cornerRadius, cornerRadius, fillPaint)
             }
 
             val label = "${batteryLevel.roundToInt()}%"
