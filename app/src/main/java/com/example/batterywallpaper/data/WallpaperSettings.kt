@@ -12,7 +12,13 @@ import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-data class WallpaperSettings(val animationLevel: Float, val batterySize: Float, val batteryColor: Int, val backgroundColor: Int)
+data class WallpaperSettings(
+    val animationLevel: Float,
+    val batteryWidth: Float,
+    val batteryHeight: Float,
+    val batteryColor: Int,
+    val backgroundColor: Int
+)
 
 class WallpaperSettingsRepository(private val context: Context) {
 
@@ -20,7 +26,8 @@ class WallpaperSettingsRepository(private val context: Context) {
         .map {
             WallpaperSettings(
                 animationLevel = it[KEY_ANIMATION_LEVEL] ?: 1f,
-                batterySize = it[KEY_BATTERY_SIZE] ?: 1f,
+                batteryWidth = it[KEY_BATTERY_WIDTH] ?: 0.6f,
+                batteryHeight = it[KEY_BATTERY_HEIGHT] ?: 0.3f,
                 batteryColor = it[KEY_BATTERY_COLOR] ?: 0xFFFFFFFF.toInt(),
                 backgroundColor = it[KEY_BACKGROUND_COLOR] ?: 0xFF101010.toInt(),
             )
@@ -30,8 +37,12 @@ class WallpaperSettingsRepository(private val context: Context) {
         context.dataStore.edit { it[KEY_ANIMATION_LEVEL] = level }
     }
 
-    suspend fun setBatterySize(size: Float) {
-        context.dataStore.edit { it[KEY_BATTERY_SIZE] = size }
+    suspend fun setBatteryWidth(width: Float) {
+        context.dataStore.edit { it[KEY_BATTERY_WIDTH] = width }
+    }
+
+    suspend fun setBatteryHeight(height: Float) {
+        context.dataStore.edit { it[KEY_BATTERY_HEIGHT] = height }
     }
 
     suspend fun setBatteryColor(color: Int) {
@@ -44,7 +55,8 @@ class WallpaperSettingsRepository(private val context: Context) {
 
     companion object {
         private val KEY_ANIMATION_LEVEL = floatPreferencesKey("animation_level")
-        private val KEY_BATTERY_SIZE = floatPreferencesKey("battery_size")
+        private val KEY_BATTERY_WIDTH = floatPreferencesKey("battery_width")
+        private val KEY_BATTERY_HEIGHT = floatPreferencesKey("battery_height")
         private val KEY_BATTERY_COLOR = intPreferencesKey("battery_color")
         private val KEY_BACKGROUND_COLOR = intPreferencesKey("background_color")
     }

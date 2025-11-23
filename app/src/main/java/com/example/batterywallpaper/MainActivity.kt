@@ -119,9 +119,14 @@ private fun SettingsScreen() {
                 onValueChange = { scope.launch { settingsRepository.setAnimationLevel(it) } }
             )
             SettingSlider(
-                label = "Battery Size",
-                value = currentSettings.batterySize,
-                onValueChange = { scope.launch { settingsRepository.setBatterySize(it) } }
+                label = "Battery Width",
+                value = currentSettings.batteryWidth,
+                onValueChange = { scope.launch { settingsRepository.setBatteryWidth(it) } }
+            )
+            SettingSlider(
+                label = "Battery Height",
+                value = currentSettings.batteryHeight,
+                onValueChange = { scope.launch { settingsRepository.setBatteryHeight(it) } }
             )
         }
 
@@ -245,7 +250,8 @@ private fun SketchyBatteryPreview(
             random = Random(System.currentTimeMillis()),
             textMeasurer = textMeasurer,
             animationLevel = settings?.animationLevel ?: 1f,
-            batterySize = settings?.batterySize ?: 1f
+            batteryWidth = settings?.batteryWidth ?: 0.6f,
+            batteryHeight = settings?.batteryHeight ?: 0.3f
         )
     }
 }
@@ -257,12 +263,13 @@ private fun DrawScope.drawSketchyBattery(
     random: Random,
     textMeasurer: TextMeasurer,
     animationLevel: Float,
-    batterySize: Float
+    batteryWidth: Float,
+    batteryHeight: Float
 ) {
-    val width = size.width * 0.7f * batterySize
-    val height = size.height * 0.35f * batterySize
+    val width = size.width * batteryWidth
+    val height = size.height * batteryHeight
     val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
-    val strokeWidth = (size.width * 0.025f) * batterySize
+    val strokeWidth = (size.width * 0.025f)
 
     fun Path.sketchyRect() {
         val wobble = strokeWidth * 0.8f * animationLevel

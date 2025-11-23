@@ -59,7 +59,7 @@ class BatteryWallpaperService : WallpaperService() {
 
         private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
-        private var wallpaperSettings = com.example.batterywallpaper.data.WallpaperSettings(1f, 1f, 0, 0)
+        private var wallpaperSettings = com.example.batterywallpaper.data.WallpaperSettings(1f, 0.6f, 0.3f, 0, 0)
 
         private val batteryReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
@@ -130,12 +130,12 @@ class BatteryWallpaperService : WallpaperService() {
         private fun drawBattery(canvas: Canvas) {
             val width = canvas.width.toFloat()
             val height = canvas.height.toFloat()
-            val batteryWidth = width * 0.6f * wallpaperSettings.batterySize
-            val batteryHeight = height * 0.3f * wallpaperSettings.batterySize
+            val batteryWidth = width * wallpaperSettings.batteryWidth
+            val batteryHeight = height * wallpaperSettings.batteryHeight
             val originX = (width - batteryWidth) / 2f
             val originY = (height - batteryHeight) / 2f
 
-            outlinePaint.strokeWidth = (width * 0.02f) * wallpaperSettings.batterySize
+            outlinePaint.strokeWidth = (width * 0.02f)
             outlinePaint.alpha = 255
             batteryBounds.set(originX, originY, originX + batteryWidth, originY + batteryHeight)
 
@@ -149,8 +149,8 @@ class BatteryWallpaperService : WallpaperService() {
             }
             canvas.drawPath(path, outlinePaint)
 
-            val capWidth = batteryWidth * 0.08f
-            val capHeight = batteryHeight * 0.22f
+            val capWidth = batteryWidth * 0.1f
+            val capHeight = batteryHeight * 0.25f
             val capPath = Path().apply {
                 moveTo(
                     batteryBounds.right + random.nextFloat() * wobble,
@@ -200,9 +200,10 @@ class BatteryWallpaperService : WallpaperService() {
             }
 
             val label = "${batteryLevel.roundToInt()}%"
+            textPaint.textSize = batteryHeight * 0.3f
             val textWidth = textPaint.measureText(label)
             val textX = batteryBounds.centerX() - textWidth / 2f
-            val textY = batteryBounds.bottom + textPaint.textSize + outlinePaint.strokeWidth
+            val textY = batteryBounds.centerY() + textPaint.textSize / 2f
             canvas.drawText(label, textX, textY, textPaint)
         }
 
