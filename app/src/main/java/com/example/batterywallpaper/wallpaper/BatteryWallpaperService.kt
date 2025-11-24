@@ -157,8 +157,7 @@ class BatteryWallpaperService : WallpaperService() {
             val screenHeight = canvas.height.toFloat()
 
             val batteryWidth = screenWidth * wallpaperSettings.batteryWidth
-            // Maintain aspect ratio. The futuristic battery is taller than it is wide.
-            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight * 1.5f
+            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight
 
             val originX = (screenWidth - batteryWidth) / 2f
             val originY = (screenHeight - batteryHeight) / 2f
@@ -166,7 +165,7 @@ class BatteryWallpaperService : WallpaperService() {
 
             outlinePaint.strokeWidth = strokeWidth
             outlinePaint.color = wallpaperSettings.edgesColor
-            outlinePaint.pathEffect = null // Make sure no effect is applied from other styles
+            outlinePaint.pathEffect = null
 
             val body = Path().apply {
                 moveTo(originX + batteryWidth * 0.2f, originY)
@@ -191,49 +190,40 @@ class BatteryWallpaperService : WallpaperService() {
             }
             canvas.drawPath(capPath, outlinePaint)
 
-            // We need a new path for clipping because the cap is outside the body
-            val clipPath = Path().apply{ addPath(body) }
+            val clipPath = Path().apply { addPath(body) }
 
             canvas.save()
             canvas.clipPath(clipPath)
 
             val batteryPercent = batteryLevel / 100f
-            val level = batteryPercent
 
             fillPaint.color = if (wallpaperSettings.batteryColor != 0) {
                 wallpaperSettings.batteryColor
             } else {
                 when {
-                    level < 0.11f -> BatteryRedValue
-                    level < 0.20f -> BatteryAmberValue
+                    batteryPercent < 0.11f -> BatteryRedValue
+                    batteryPercent < 0.20f -> BatteryAmberValue
                     else -> BatteryGreenValue
                 }
             }.toInt()
 
-            val totalSegments = 10
-            val segmentsToDraw = (level * totalSegments).roundToInt()
-
             if (fillPaint.color != 0) {
-                val segmentHeight = (batteryHeight * 0.9f) / totalSegments
-                val segmentWidth = batteryWidth * 0.7f
-                val segmentSpacing = segmentHeight * 0.25f
-
-                for (i in 0 until segmentsToDraw) {
-                    val y = originY + batteryHeight * 0.95f - (i + 1) * segmentHeight + segmentSpacing / 2f
-                    canvas.drawRect(
-                        originX + (batteryWidth - segmentWidth) / 2f,
-                        y,
-                        originX + (batteryWidth + segmentWidth) / 2f,
-                        y + segmentHeight - segmentSpacing, fillPaint
-                    )
-                }
+                val fillHeight = batteryHeight * batteryPercent
+                val fillY = originY + batteryHeight - fillHeight
+                canvas.drawRect(
+                    originX,
+                    fillY,
+                    originX + batteryWidth,
+                    originY + batteryHeight,
+                    fillPaint
+                )
             }
 
             canvas.restore()
 
             val label = "${batteryLevel.roundToInt()}%"
             textPaint.color = wallpaperSettings.textColor
-            textPaint.textSize = batteryHeight * wallpaperSettings.textSize * 0.2f
+            textPaint.textSize = batteryHeight * wallpaperSettings.textSize * 0.3f
 
             val textX = originX + batteryWidth / 2f
             val textY = originY + batteryHeight / 2f - (textPaint.ascent() + textPaint.descent()) / 2f
@@ -245,7 +235,7 @@ class BatteryWallpaperService : WallpaperService() {
             val screenHeight = canvas.height.toFloat()
 
             val batteryWidth = screenWidth * wallpaperSettings.batteryWidth
-            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight // Maintain aspect ratio
+            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight
 
             val originX = (screenWidth - batteryWidth) / 2f
             val originY = (screenHeight - batteryHeight) / 2f
@@ -294,7 +284,7 @@ class BatteryWallpaperService : WallpaperService() {
                     else -> BatteryGreenValue
                 }
             }.toInt()
-            
+
             val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.gaugeAnimationLevel) * strokeWidth
             val innerPadding = strokeWidth * 1.5f
             if (fillPaint.color != 0) { // Don't draw if transparent
