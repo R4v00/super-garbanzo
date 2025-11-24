@@ -14,7 +14,6 @@ import android.os.Handler
 import android.os.Looper
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
-import androidx.compose.ui.graphics.toArgb
 import com.example.batterywallpaper.data.BatteryStyle
 import com.example.batterywallpaper.data.WallpaperSettings
 import com.example.batterywallpaper.data.WallpaperSettingsRepository
@@ -44,8 +43,6 @@ class BatteryWallpaperService : WallpaperService() {
         private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
         private var wallpaperSettings: WallpaperSettings
-
-        private val random = Random(System.currentTimeMillis())
 
         init {
             wallpaperSettings = runBlocking {
@@ -152,7 +149,7 @@ class BatteryWallpaperService : WallpaperService() {
             val outlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
                 style = Paint.Style.STROKE
                 color = wallpaperSettings.edgesColor
-                strokeWidth = this@BatteryEngine.strokeWidth
+                this.strokeWidth = strokeWidth
             }
 
             val body = Path().apply {
@@ -173,8 +170,8 @@ class BatteryWallpaperService : WallpaperService() {
             val capPath = Path().apply {
                 moveTo(originX + (batteryWidth - capWidth) / 2f, originY)
                 lineTo(originX + (batteryWidth + capWidth) / 2f, originY)
-                lineTo(originX + (width + capWidth) / 2f, originY - capHeight)
-                lineTo(originX + (width - capWidth) / 2f, originY - capHeight)
+                lineTo(originX + (batteryWidth + capWidth) / 2f, originY - capHeight)
+                lineTo(originX + (batteryWidth - capWidth) / 2f, originY - capHeight)
                 close()
             }
             canvas.drawPath(capPath, outlinePaint)
@@ -228,7 +225,7 @@ class BatteryWallpaperService : WallpaperService() {
             val outlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
                 style = Paint.Style.STROKE
                 color = wallpaperSettings.edgesColor
-                strokeWidth = this@BatteryEngine.strokeWidth
+                this.strokeWidth = strokeWidth
             }
 
             val cornerRadius = batteryWidth * 0.1f
