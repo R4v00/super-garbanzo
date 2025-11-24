@@ -131,9 +131,14 @@ private fun SettingsScreen() {
 
         settings?.let { currentSettings ->
             SettingSlider(
-                label = "Animation Level",
-                value = currentSettings.animationLevel,
-                onValueChange = { scope.launch { settingsRepository.setAnimationLevel(it) } }
+                label = "Gauge Animation Level",
+                value = currentSettings.gaugeAnimationLevel,
+                onValueChange = { scope.launch { settingsRepository.setGaugeAnimationLevel(it) } }
+            )
+            SettingSlider(
+                label = "Edge Animation Level",
+                value = currentSettings.edgeAnimationLevel,
+                onValueChange = { scope.launch { settingsRepository.setEdgeAnimationLevel(it) } }
             )
             SettingSlider(
                 label = "Battery Width",
@@ -291,7 +296,8 @@ private fun SketchyBatteryPreview(
             textColor = textColor,
             random = Random(System.currentTimeMillis()),
             textMeasurer = textMeasurer,
-            animationLevel = settings?.animationLevel ?: 1f,
+            gaugeAnimationLevel = settings?.gaugeAnimationLevel ?: 1f,
+            edgeAnimationLevel = settings?.edgeAnimationLevel ?: 1f,
             batteryWidth = settings?.batteryWidth ?: 0.6f,
             batteryHeight = settings?.batteryHeight ?: 0.3f,
             textSize = settings?.textSize ?: 0.5f
@@ -306,7 +312,8 @@ private fun DrawScope.drawSketchyBattery(
     textColor: Color,
     random: Random,
     textMeasurer: TextMeasurer,
-    animationLevel: Float,
+    gaugeAnimationLevel: Float,
+    edgeAnimationLevel: Float,
     batteryWidth: Float,
     batteryHeight: Float,
     textSize: Float
@@ -316,7 +323,7 @@ private fun DrawScope.drawSketchyBattery(
     val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
     val strokeWidth = width * 0.04f
 
-    val wobble = strokeWidth * 1.2f * animationLevel
+    val wobble = strokeWidth * 1.2f * edgeAnimationLevel
 
     fun r(w: Float): Float = (random.nextFloat() - 0.5f) * w * 2
 
@@ -353,7 +360,7 @@ private fun DrawScope.drawSketchyBattery(
     val innerPadding = strokeWidth * 1.5f
     val fillWidth = (width - innerPadding * 2) * level
     val fillHeight = height - innerPadding * 2
-    val wobbleOffset = sin(System.currentTimeMillis() / 500f * animationLevel) * strokeWidth
+    val wobbleOffset = sin(System.currentTimeMillis() / 500f * gaugeAnimationLevel) * strokeWidth
 
     if (gaugeColor.alpha > 0f) {
         drawRoundRect(

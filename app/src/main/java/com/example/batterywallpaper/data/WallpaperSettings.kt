@@ -14,7 +14,8 @@ import kotlinx.coroutines.flow.map
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 data class WallpaperSettings(
-    val animationLevel: Float,
+    val gaugeAnimationLevel: Float,
+    val edgeAnimationLevel: Float,
     val batteryWidth: Float,
     val batteryHeight: Float,
     val batteryColor: Int,
@@ -29,7 +30,8 @@ class WallpaperSettingsRepository(private val context: Context) {
     val wallpaperSettings: Flow<WallpaperSettings> = context.dataStore.data
         .map {
             WallpaperSettings(
-                animationLevel = it[KEY_ANIMATION_LEVEL] ?: 1f,
+                gaugeAnimationLevel = it[KEY_GAUGE_ANIMATION_LEVEL] ?: 1f,
+                edgeAnimationLevel = it[KEY_EDGE_ANIMATION_LEVEL] ?: 1f,
                 batteryWidth = it[KEY_BATTERY_WIDTH] ?: 0.6f,
                 batteryHeight = it[KEY_BATTERY_HEIGHT] ?: 0.3f,
                 batteryColor = it[KEY_BATTERY_COLOR] ?: 0,
@@ -40,8 +42,12 @@ class WallpaperSettingsRepository(private val context: Context) {
             )
         }
 
-    suspend fun setAnimationLevel(level: Float) {
-        context.dataStore.edit { it[KEY_ANIMATION_LEVEL] = level }
+    suspend fun setGaugeAnimationLevel(level: Float) {
+        context.dataStore.edit { it[KEY_GAUGE_ANIMATION_LEVEL] = level }
+    }
+
+    suspend fun setEdgeAnimationLevel(level: Float) {
+        context.dataStore.edit { it[KEY_EDGE_ANIMATION_LEVEL] = level }
     }
 
     suspend fun setBatteryWidth(width: Float) {
@@ -73,7 +79,8 @@ class WallpaperSettingsRepository(private val context: Context) {
     }
 
     companion object {
-        private val KEY_ANIMATION_LEVEL = floatPreferencesKey("animation_level")
+        private val KEY_GAUGE_ANIMATION_LEVEL = floatPreferencesKey("gauge_animation_level")
+        private val KEY_EDGE_ANIMATION_LEVEL = floatPreferencesKey("edge_animation_level")
         private val KEY_BATTERY_WIDTH = floatPreferencesKey("battery_width")
         private val KEY_BATTERY_HEIGHT = floatPreferencesKey("battery_height")
         private val KEY_BATTERY_COLOR = intPreferencesKey("battery_color")

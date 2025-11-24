@@ -157,8 +157,7 @@ class BatteryWallpaperService : WallpaperService() {
             outlinePaint.color = wallpaperSettings.edgesColor
 
             // --- Draw cartoonish battery outline --- //
-            val animationLevel = wallpaperSettings.animationLevel
-            val wobble = strokeWidth * 1.2f * animationLevel
+            val wobble = strokeWidth * 1.2f * wallpaperSettings.edgeAnimationLevel
             val cornerRadius = batteryWidth * 0.1f
             outlinePaint.pathEffect = CornerPathEffect(cornerRadius)
 
@@ -200,7 +199,7 @@ class BatteryWallpaperService : WallpaperService() {
                 }
             }.toInt()
 
-            val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.animationLevel) * strokeWidth
+            val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.gaugeAnimationLevel) * strokeWidth
             val innerPadding = strokeWidth * 1.5f
             if (fillPaint.color != 0) { // Don't draw if transparent
                 val fillWidth = (batteryWidth - innerPadding * 2) * batteryPercent
