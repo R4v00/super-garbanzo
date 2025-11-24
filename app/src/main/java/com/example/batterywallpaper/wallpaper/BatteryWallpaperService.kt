@@ -46,6 +46,13 @@ class BatteryWallpaperService : WallpaperService() {
             textAlign = Paint.Align.CENTER
         }
 
+        // Paths for drawing, reused to avoid allocations
+        private val futuristicBodyPath = Path()
+        private val futuristicCapPath = Path()
+        private val futuristicClipPath = Path()
+        private val cartoonishBodyPath = Path()
+        private val cartoonishCapPath = Path()
+
         private var visible = false
         private var batteryLevel = 50f
         private val drawRunnable: Runnable = Runnable { drawFrame() }
@@ -62,7 +69,14 @@ class BatteryWallpaperService : WallpaperService() {
                 val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
                 val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
                 if (level >= 0 && scale > 0) {
-                    batteryLevel = (level / scale.toFloat()) * 100f
+                    val newBatteryLevel = (level / scale.toFloat()) * 100f
+                    // Redraw only if the battery level has changed
+                    if (batteryLevel.roundToInt() != newBatteryLevel.roundToInt()) {
+                        batteryLevel = newBatteryLevel
+                        if (visible) {
+                            handler.post(drawRunnable)
+                        }
+                    }
                 }
             }
         }
@@ -86,7 +100,7 @@ class BatteryWallpaperService : WallpaperService() {
                     val isFirstLoad = wallpaperSettings == null
                     wallpaperSettings = settings
                     if (isFirstLoad && visible) {
-                        handler.post { scheduleNextFrame() }
+                        handler.post(drawRunnable)
                     }
                 }
             }
@@ -102,9 +116,7 @@ class BatteryWallpaperService : WallpaperService() {
         override fun onVisibilityChanged(visible: Boolean) {
             this.visible = visible
             if (visible) {
-                if (wallpaperSettings != null) {
-                    scheduleNextFrame()
-                }
+                handler.post(drawRunnable)
             } else {
                 handler.removeCallbacks(drawRunnable)
             }
@@ -118,7 +130,8 @@ class BatteryWallpaperService : WallpaperService() {
 
         private fun scheduleNextFrame() {
             handler.removeCallbacks(drawRunnable)
-            handler.postDelayed(drawRunnable, 16L)
+            // ~30 fps for cartoonish style
+            handler.postDelayed(drawRunnable, 33L)
         }
 
         private fun nowSeconds(): Float = SystemClock.elapsedRealtime() / 1000f
@@ -137,7 +150,12 @@ class BatteryWallpaperService : WallpaperService() {
                 } finally {
                     currentHolder.unlockCanvasAndPost(canvas)
                 }
-                scheduleNextFrame()
+
+                // Cartoonish style has animations, so we need to keep drawing.
+                // Futuristic style only needs to be redrawn on battery level change.
+                if (currentSettings.batteryStyle == BatteryStyle.Cartoonish) {
+                    scheduleNextFrame()
+                }
             }
         }
 
@@ -163,7 +181,8 @@ class BatteryWallpaperService : WallpaperService() {
             outlinePaint.color = settings.edgesColor
             outlinePaint.pathEffect = null
 
-            val body = Path().apply {
+            futuristicBodyPath.rewind()
+            futuristicBodyPath.apply {
                 moveTo(originX + batteryWidth * 0.2f, originY)
                 lineTo(originX + batteryWidth * 0.8f, originY)
                 lineTo(originX + batteryWidth, originY + batteryHeight * 0.1f)
@@ -174,22 +193,24 @@ class BatteryWallpaperService : WallpaperService() {
                 lineTo(originX, originY + batteryHeight * 0.1f)
                 close()
             }
-            canvas.drawPath(body, outlinePaint)
+            canvas.drawPath(futuristicBodyPath, outlinePaint)
 
             val capWidth = batteryWidth * 0.3f
             val capHeight = batteryHeight * 0.05f
-            val capPath = Path().apply {
+            futuristicCapPath.rewind()
+            futuristicCapPath.apply {
                 val capOriginX = originX + (batteryWidth - capWidth) / 2f
                 val capOriginY = originY - capHeight
                 addRect(capOriginX, capOriginY, capOriginX + capWidth, originY, Path.Direction.CW)
                 close()
             }
-            canvas.drawPath(capPath, outlinePaint)
+            canvas.drawPath(futuristicCapPath, outlinePaint)
 
-            val clipPath = Path().apply { addPath(body) }
+            futuristicClipPath.rewind()
+            futuristicClipPath.addPath(futuristicBodyPath)
 
             canvas.save()
-            canvas.clipPath(clipPath)
+            canvas.clipPath(futuristicClipPath)
 
             val batteryPercent = batteryLevel / 100f
 
@@ -246,18 +267,20 @@ class BatteryWallpaperService : WallpaperService() {
             val wobble = strokeWidth * 1.2f * settings.edgeAnimationLevel
             fun r(w: Float): Float = (random.nextFloat() - 0.5f) * w * 2f
 
-            val bodyPath = Path().apply {
+            cartoonishBodyPath.rewind()
+            cartoonishBodyPath.apply {
                 moveTo(originX + r(wobble), originY + r(wobble))
                 lineTo(originX + batteryWidth + r(wobble), originY + r(wobble))
                 lineTo(originX + batteryWidth + r(wobble), originY + batteryHeight + r(wobble))
                 lineTo(originX + r(wobble), originY + batteryHeight + r(wobble))
                 close()
             }
-            canvas.drawPath(bodyPath, outlinePaint)
+            canvas.drawPath(cartoonishBodyPath, outlinePaint)
 
             val capWidth = batteryWidth * 0.1f
             val capHeight = batteryHeight * 0.25f
-            val capPath = Path().apply {
+            cartoonishCapPath.rewind()
+            cartoonishCapPath.apply {
                 val capOriginX = originX + batteryWidth
                 val capOriginY = originY + (batteryHeight - capHeight) / 2f
                 moveTo(capOriginX + r(wobble), capOriginY + r(wobble))
@@ -266,7 +289,7 @@ class BatteryWallpaperService : WallpaperService() {
                 lineTo(capOriginX + r(wobble), capOriginY + capHeight + r(wobble))
                 close()
             }
-            canvas.drawPath(capPath, outlinePaint)
+            canvas.drawPath(cartoonishCapPath, outlinePaint)
             outlinePaint.pathEffect = null
 
             val batteryPercent = batteryLevel / 100f
