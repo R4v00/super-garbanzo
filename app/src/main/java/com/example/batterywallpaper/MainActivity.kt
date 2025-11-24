@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SettingsScreen() {
     val context = LocalContext.current
@@ -174,26 +175,36 @@ private fun SettingsScreen() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BatteryStyleDropdown(selectedStyle: BatteryStyle, onStyleSelected: (BatteryStyle) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     val items = listOf(BatteryStyle.Cartoonish, BatteryStyle.Futuristic)
 
-    Box {
-        Text(
-            text = "Style: ${selectedStyle.id}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { expanded = true }
-                .padding(8.dp),
-            textAlign = TextAlign.Center
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+        TextField(
+            value = selectedStyle.id,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text("Battery Style") },
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            modifier = Modifier.menuAnchor().fillMaxWidth()
         )
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
             items.forEach { style ->
-                DropdownMenuItem(text = { Text(style.id) }, onClick = {
-                    onStyleSelected(style)
-                    expanded = false
-                })
+                DropdownMenuItem(
+                    text = { Text(style.id) },
+                    onClick = {
+                        onStyleSelected(style)
+                        expanded = false
+                    }
+                )
             }
         }
     }

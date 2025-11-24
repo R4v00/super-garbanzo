@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Canvas
+import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PorterDuff
@@ -12,6 +13,7 @@ import android.graphics.RectF
 import android.os.BatteryManager
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import com.example.batterywallpaper.data.BatteryStyle
@@ -28,6 +30,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.math.roundToInt
+import kotlin.math.sin
 import kotlin.random.Random
 
 class BatteryWallpaperService : WallpaperService() {
@@ -35,6 +38,16 @@ class BatteryWallpaperService : WallpaperService() {
 
     private inner class BatteryEngine : Engine() {
         private val handler = Handler(Looper.getMainLooper())
+        private val outlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.STROKE
+        }
+        private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.FILL
+        }
+        private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.FILL
+            textAlign = Paint.Align.CENTER
+        }
 
         private var visible = false
         private var batteryLevel = 50f
@@ -43,6 +56,8 @@ class BatteryWallpaperService : WallpaperService() {
         private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
         private var wallpaperSettings: WallpaperSettings
+
+        private val random = Random(System.currentTimeMillis())
 
         init {
             wallpaperSettings = runBlocking {
@@ -109,6 +124,8 @@ class BatteryWallpaperService : WallpaperService() {
             handler.postDelayed(drawRunnable, 16L)
         }
 
+        private fun nowSeconds(): Float = SystemClock.elapsedRealtime() / 1000f
+
         private fun drawFrame() {
             if (!visible) return
             val holder = surfaceHolder ?: return
@@ -140,74 +157,87 @@ class BatteryWallpaperService : WallpaperService() {
             val screenHeight = canvas.height.toFloat()
 
             val batteryWidth = screenWidth * wallpaperSettings.batteryWidth
-            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight // Maintain aspect ratio
+            // Maintain aspect ratio. The futuristic battery is taller than it is wide.
+            val batteryHeight = screenWidth * wallpaperSettings.batteryHeight * 1.5f
 
             val originX = (screenWidth - batteryWidth) / 2f
             val originY = (screenHeight - batteryHeight) / 2f
             val strokeWidth = batteryWidth * 0.05f
 
-            val outlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                style = Paint.Style.STROKE
-                color = wallpaperSettings.edgesColor
-                this.strokeWidth = strokeWidth
-            }
+            outlinePaint.strokeWidth = strokeWidth
+            outlinePaint.color = wallpaperSettings.edgesColor
+            outlinePaint.pathEffect = null // Make sure no effect is applied from other styles
 
             val body = Path().apply {
                 moveTo(originX + batteryWidth * 0.2f, originY)
                 lineTo(originX + batteryWidth * 0.8f, originY)
-                lineTo(originX + batteryWidth, originY + batteryHeight * 0.2f)
-                lineTo(originX + batteryWidth, originY + batteryHeight * 0.8f)
+                lineTo(originX + batteryWidth, originY + batteryHeight * 0.1f)
+                lineTo(originX + batteryWidth, originY + batteryHeight * 0.9f)
                 lineTo(originX + batteryWidth * 0.8f, originY + batteryHeight)
                 lineTo(originX + batteryWidth * 0.2f, originY + batteryHeight)
-                lineTo(originX, originY + batteryHeight * 0.8f)
-                lineTo(originX, originY + batteryHeight * 0.2f)
+                lineTo(originX, originY + batteryHeight * 0.9f)
+                lineTo(originX, originY + batteryHeight * 0.1f)
                 close()
             }
             canvas.drawPath(body, outlinePaint)
 
             val capWidth = batteryWidth * 0.3f
-            val capHeight = batteryHeight * 0.1f
+            val capHeight = batteryHeight * 0.05f
             val capPath = Path().apply {
-                moveTo(originX + (batteryWidth - capWidth) / 2f, originY)
-                lineTo(originX + (batteryWidth + capWidth) / 2f, originY)
-                lineTo(originX + (batteryWidth + capWidth) / 2f, originY - capHeight)
-                lineTo(originX + (batteryWidth - capWidth) / 2f, originY - capHeight)
+                val capOriginX = originX + (batteryWidth - capWidth) / 2f
+                val capOriginY = originY - capHeight
+                addRect(capOriginX, capOriginY, capOriginX + capWidth, originY, Path.Direction.CW)
                 close()
             }
             canvas.drawPath(capPath, outlinePaint)
 
-            canvas.clipPath(body)
+            // We need a new path for clipping because the cap is outside the body
+            val clipPath = Path().apply{ addPath(body) }
 
-            val level = batteryLevel / 100f
+            canvas.save()
+            canvas.clipPath(clipPath)
+
+            val batteryPercent = batteryLevel / 100f
+            val level = batteryPercent
+
+            fillPaint.color = if (wallpaperSettings.batteryColor != 0) {
+                wallpaperSettings.batteryColor
+            } else {
+                when {
+                    level < 0.11f -> BatteryRedValue
+                    level < 0.20f -> BatteryAmberValue
+                    else -> BatteryGreenValue
+                }
+            }.toInt()
+
             val totalSegments = 10
             val segmentsToDraw = (level * totalSegments).roundToInt()
 
-            val segmentHeight = batteryHeight / totalSegments
-            val segmentWidth = batteryWidth * 0.8f
-            val segmentSpacing = segmentHeight * 0.2f
+            if (fillPaint.color != 0) {
+                val segmentHeight = (batteryHeight * 0.9f) / totalSegments
+                val segmentWidth = batteryWidth * 0.7f
+                val segmentSpacing = segmentHeight * 0.25f
 
-            val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                style = Paint.Style.FILL
-                color = if (wallpaperSettings.batteryColor != 0) {
-                    wallpaperSettings.batteryColor
-                } else {
-                    when {
-                        level < 0.11f -> BatteryRedValue
-                        level < 0.20f -> BatteryAmberValue
-                        else -> BatteryGreenValue
-                    }
-                }.toInt()
+                for (i in 0 until segmentsToDraw) {
+                    val y = originY + batteryHeight * 0.95f - (i + 1) * segmentHeight + segmentSpacing / 2f
+                    canvas.drawRect(
+                        originX + (batteryWidth - segmentWidth) / 2f,
+                        y,
+                        originX + (batteryWidth + segmentWidth) / 2f,
+                        y + segmentHeight - segmentSpacing, fillPaint
+                    )
+                }
             }
 
-            for (i in 0 until segmentsToDraw) {
-                val y = originY + batteryHeight - (i + 1) * segmentHeight + segmentSpacing / 2f
-                canvas.drawRect(
-                    originX + (batteryWidth - segmentWidth) / 2,
-                    y,
-                    originX + (batteryWidth + segmentWidth) / 2,
-                    y + segmentHeight - segmentSpacing, fillPaint
-                )
-            }
+            canvas.restore()
+
+            val label = "${batteryLevel.roundToInt()}%"
+            textPaint.color = wallpaperSettings.textColor
+            textPaint.textSize = batteryHeight * wallpaperSettings.textSize * 0.2f
+
+            val textX = originX + batteryWidth / 2f
+            val textY = originY + batteryHeight / 2f - (textPaint.ascent() + textPaint.descent()) / 2f
+            canvas.drawText(label, textX, textY, textPaint)
         }
 
         private fun drawCartoonishBattery(canvas: Canvas) {
@@ -221,40 +251,51 @@ class BatteryWallpaperService : WallpaperService() {
             val originY = (screenHeight - batteryHeight) / 2f
 
             val strokeWidth = batteryWidth * 0.04f
-
-            val outlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                style = Paint.Style.STROKE
-                color = wallpaperSettings.edgesColor
-                this.strokeWidth = strokeWidth
-            }
+            outlinePaint.strokeWidth = strokeWidth
+            outlinePaint.color = wallpaperSettings.edgesColor
 
             val cornerRadius = batteryWidth * 0.1f
+            outlinePaint.pathEffect = CornerPathEffect(cornerRadius)
 
-            val bodyRect = RectF(originX, originY, originX + batteryWidth, originY + batteryHeight)
-            canvas.drawRoundRect(bodyRect, cornerRadius, cornerRadius, outlinePaint)
+            val wobble = strokeWidth * 1.2f * wallpaperSettings.edgeAnimationLevel
+            fun r(w: Float): Float = (random.nextFloat() - 0.5f) * w * 2f
+
+            val bodyPath = Path().apply {
+                moveTo(originX + r(wobble), originY + r(wobble))
+                lineTo(originX + batteryWidth + r(wobble), originY + r(wobble))
+                lineTo(originX + batteryWidth + r(wobble), originY + batteryHeight + r(wobble))
+                lineTo(originX + r(wobble), originY + batteryHeight + r(wobble))
+                close()
+            }
+            canvas.drawPath(bodyPath, outlinePaint)
 
             val capWidth = batteryWidth * 0.1f
             val capHeight = batteryHeight * 0.25f
-            val capOriginX = originX + batteryWidth
-            val capOriginY = originY + (batteryHeight - capHeight) / 2f
-            val capRect = RectF(capOriginX, capOriginY, capOriginX + capWidth, capOriginY + capHeight)
-            canvas.drawRoundRect(capRect, cornerRadius / 2, cornerRadius / 2, outlinePaint)
+            val capPath = Path().apply {
+                val capOriginX = originX + batteryWidth
+                val capOriginY = originY + (batteryHeight - capHeight) / 2f
+                moveTo(capOriginX + r(wobble), capOriginY + r(wobble))
+                lineTo(capOriginX + capWidth + r(wobble), capOriginY + r(wobble))
+                lineTo(capOriginX + capWidth + r(wobble), capOriginY + capHeight + r(wobble))
+                lineTo(capOriginX + r(wobble), capOriginY + capHeight + r(wobble))
+                close()
+            }
+            canvas.drawPath(capPath, outlinePaint)
+            outlinePaint.pathEffect = null
 
             val batteryPercent = batteryLevel / 100f
 
-            val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                style = Paint.Style.FILL
-                color = if (wallpaperSettings.batteryColor != 0) {
-                    wallpaperSettings.batteryColor
-                } else {
-                    when {
-                        batteryPercent < 0.11f -> BatteryRedValue
-                        batteryPercent < 0.20f -> BatteryAmberValue
-                        else -> BatteryGreenValue
-                    }
-                }.toInt()
-            }
-
+            fillPaint.color = if (wallpaperSettings.batteryColor != 0) {
+                wallpaperSettings.batteryColor
+            } else {
+                when {
+                    batteryPercent < 0.11f -> BatteryRedValue
+                    batteryPercent < 0.20f -> BatteryAmberValue
+                    else -> BatteryGreenValue
+                }
+            }.toInt()
+            
+            val wobbleOffset = sin(nowSeconds() * 2f * wallpaperSettings.gaugeAnimationLevel) * strokeWidth
             val innerPadding = strokeWidth * 1.5f
             if (fillPaint.color != 0) { // Don't draw if transparent
                 val fillWidth = (batteryWidth - innerPadding * 2) * batteryPercent
@@ -262,23 +303,19 @@ class BatteryWallpaperService : WallpaperService() {
 
                 val fillRect = RectF(
                     originX + innerPadding,
-                    originY + innerPadding,
+                    originY + innerPadding + wobbleOffset,
                     originX + innerPadding + fillWidth,
-                    originY + innerPadding + fillHeight
+                    originY + innerPadding + fillHeight + wobbleOffset
                 )
                 canvas.drawRoundRect(fillRect, cornerRadius, cornerRadius, fillPaint)
             }
 
             val label = "${batteryLevel.roundToInt()}%"
-            val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                style = Paint.Style.FILL
-                textAlign = Paint.Align.CENTER
-                color = wallpaperSettings.textColor
-                textSize = batteryHeight * wallpaperSettings.textSize
-            }
+            textPaint.color = wallpaperSettings.textColor
+            textPaint.textSize = batteryHeight * wallpaperSettings.textSize
 
-            val textX = originX + batteryWidth / 2f
-            val textY = originY + batteryHeight / 2f - (textPaint.ascent() + textPaint.descent()) / 2f
+            val textX = originX + batteryWidth / 2f + r(wobble * 0.2f)
+            val textY = originY + batteryHeight / 2f - (textPaint.ascent() + textPaint.descent()) / 2f + wobbleOffset
             canvas.drawText(label, textX, textY, textPaint)
         }
     }
