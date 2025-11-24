@@ -25,32 +25,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextMeasurer
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.batterywallpaper.data.BatteryStyle
 import com.example.batterywallpaper.data.WallpaperSettings
 import com.example.batterywallpaper.data.WallpaperSettingsRepository
+import com.example.batterywallpaper.drawing.drawBattery
 import com.example.batterywallpaper.ui.theme.BatteryWallpaperTheme
 import com.example.batterywallpaper.wallpaper.BatteryWallpaperService
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
-import kotlin.math.sin
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -122,7 +111,7 @@ private fun SettingsScreen() {
             textAlign = TextAlign.Center
         )
 
-        SketchyBatteryPreview(
+        BatteryPreview(
             batteryLevel = animatedLevel,
             modifier = Modifier.size(220.dp),
             textMeasurer = textMeasurer,
@@ -130,6 +119,9 @@ private fun SettingsScreen() {
         )
 
         settings?.let { currentSettings ->
+            BatteryStyleDropdown(currentSettings.batteryStyle) { newStyle ->
+                scope.launch { settingsRepository.setBatteryStyle(newStyle) }
+            }
             SettingSlider(
                 label = "Gauge Animation Level",
                 value = currentSettings.gaugeAnimationLevel,
@@ -178,6 +170,31 @@ private fun SettingsScreen() {
             scope.launch { launchWallpaperSettings(context) }
         }, shape = RoundedCornerShape(20.dp)) {
             Text(text = "Set as Live Wallpaper")
+        }
+    }
+}
+
+@Composable
+private fun BatteryStyleDropdown(selectedStyle: BatteryStyle, onStyleSelected: (BatteryStyle) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+    val items = listOf(BatteryStyle.Cartoonish, BatteryStyle.Futuristic)
+
+    Box {
+        Text(
+            text = "Style: ${selectedStyle.id}",
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { expanded = true }
+                .padding(8.dp),
+            textAlign = TextAlign.Center
+        )
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            items.forEach { style ->
+                DropdownMenuItem(text = { Text(style.id) }, onClick = {
+                    onStyleSelected(style)
+                    expanded = false
+                })
+            }
         }
     }
 }
@@ -263,7 +280,7 @@ private fun Intent.extractBatteryLevel(): Float {
 }
 
 @Composable
-private fun SketchyBatteryPreview(
+private fun BatteryPreview(
     modifier: Modifier = Modifier,
     batteryLevel: Float,
     textMeasurer: TextMeasurer,
@@ -289,100 +306,16 @@ private fun SketchyBatteryPreview(
     val textColor = settings?.textColor?.let { Color(it) } ?: MaterialTheme.colorScheme.onSurface
 
     Canvas(modifier = modifier.background(backgroundColor)) {
-        drawSketchyBattery(
-            level = batteryLevel,
-            gaugeColor = gaugeColor,
-            strokeColor = strokeColor,
-            textColor = textColor,
-            random = Random(System.currentTimeMillis()),
-            textMeasurer = textMeasurer,
-            gaugeAnimationLevel = settings?.gaugeAnimationLevel ?: 1f,
-            edgeAnimationLevel = settings?.edgeAnimationLevel ?: 1f,
-            batteryWidth = settings?.batteryWidth ?: 0.6f,
-            batteryHeight = settings?.batteryHeight ?: 0.3f,
-            textSize = settings?.textSize ?: 0.5f
-        )
-    }
-}
-
-private fun DrawScope.drawSketchyBattery(
-    level: Float,
-    gaugeColor: Color,
-    strokeColor: Color,
-    textColor: Color,
-    random: Random,
-    textMeasurer: TextMeasurer,
-    gaugeAnimationLevel: Float,
-    edgeAnimationLevel: Float,
-    batteryWidth: Float,
-    batteryHeight: Float,
-    textSize: Float
-) {
-    val width = size.width * batteryWidth
-    val height = size.width * batteryHeight // Use size.width to maintain aspect ratio
-    val origin = Offset(x = (size.width - width) / 2f, y = (size.height - height) / 2f)
-    val strokeWidth = width * 0.04f
-
-    val wobble = strokeWidth * 1.2f * edgeAnimationLevel
-
-    fun r(w: Float): Float = (random.nextFloat() - 0.5f) * w * 2
-
-    val cornerRadius = width * 0.1f
-
-    val bodyPath = Path().apply {
-        addRoundRect(
-            roundRect = androidx.compose.ui.geometry.RoundRect(
-                rect = Rect(origin, Size(width, height)),
-                cornerRadius = CornerRadius(cornerRadius, cornerRadius)
+        if (settings != null) {
+            drawBattery(
+                settings = settings,
+                level = batteryLevel,
+                gaugeColor = gaugeColor,
+                strokeColor = strokeColor,
+                textColor = textColor,
+                textMeasurer = textMeasurer,
+                random = Random(System.currentTimeMillis())
             )
-        )
-    }
-    drawPath(
-        path = bodyPath,
-        color = strokeColor,
-        style = Stroke(width = strokeWidth)
-    )
-
-    val capWidth = width * 0.1f
-    val capHeight = height * 0.25f
-    val capPath = Path().apply {
-        val capOriginX = origin.x + width
-        val capOriginY = origin.y + (height - capHeight) / 2f
-        addRoundRect(
-            roundRect = androidx.compose.ui.geometry.RoundRect(
-                rect = Rect(Offset(capOriginX, capOriginY), Size(capWidth, capHeight)),
-                cornerRadius = CornerRadius(cornerRadius / 2, cornerRadius / 2)
-            )
-        )
-    }
-    drawPath(capPath, strokeColor, style = Stroke(width = strokeWidth * 0.9f))
-
-    val innerPadding = strokeWidth * 1.5f
-    val fillWidth = (width - innerPadding * 2) * level
-    val fillHeight = height - innerPadding * 2
-    val wobbleOffset = sin(System.currentTimeMillis() / 500f * gaugeAnimationLevel) * strokeWidth
-
-    if (gaugeColor.alpha > 0f) {
-        drawRoundRect(
-            color = gaugeColor,
-            topLeft = Offset(origin.x + innerPadding, origin.y + innerPadding + wobbleOffset),
-            size = Size(fillWidth, fillHeight),
-            cornerRadius = CornerRadius(cornerRadius, cornerRadius)
-        )
-    }
-
-    val label = "${(level * 100).roundToInt()}%"
-    val textStyle = TextStyle(
-        color = textColor,
-        fontSize = (height * textSize).sp,
-        textAlign = TextAlign.Center
-    )
-    val textLayoutResult = textMeasurer.measure(label, style = textStyle)
-
-    translate(
-        left = origin.x + (width - textLayoutResult.size.width) / 2f + r(wobble * 0.2f),
-        top = origin.y + (height - textLayoutResult.size.height) / 2f + wobbleOffset
-    ) {
-        drawText(textLayoutResult)
+        }
     }
 }

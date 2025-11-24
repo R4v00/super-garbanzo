@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.map
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 data class WallpaperSettings(
+    val batteryStyle: BatteryStyle,
     val gaugeAnimationLevel: Float,
     val edgeAnimationLevel: Float,
     val batteryWidth: Float,
@@ -30,6 +32,7 @@ class WallpaperSettingsRepository(private val context: Context) {
     val wallpaperSettings: Flow<WallpaperSettings> = context.dataStore.data
         .map {
             WallpaperSettings(
+                batteryStyle = BatteryStyle.fromId(it[KEY_BATTERY_STYLE]),
                 gaugeAnimationLevel = it[KEY_GAUGE_ANIMATION_LEVEL] ?: 1f,
                 edgeAnimationLevel = it[KEY_EDGE_ANIMATION_LEVEL] ?: 1f,
                 batteryWidth = it[KEY_BATTERY_WIDTH] ?: 0.6f,
@@ -41,6 +44,10 @@ class WallpaperSettingsRepository(private val context: Context) {
                 textSize = it[KEY_TEXT_SIZE] ?: 0.5f
             )
         }
+
+    suspend fun setBatteryStyle(style: BatteryStyle) {
+        context.dataStore.edit { it[KEY_BATTERY_STYLE] = style.id }
+    }
 
     suspend fun setGaugeAnimationLevel(level: Float) {
         context.dataStore.edit { it[KEY_GAUGE_ANIMATION_LEVEL] = level }
@@ -79,6 +86,7 @@ class WallpaperSettingsRepository(private val context: Context) {
     }
 
     companion object {
+        private val KEY_BATTERY_STYLE = stringPreferencesKey("battery_style")
         private val KEY_GAUGE_ANIMATION_LEVEL = floatPreferencesKey("gauge_animation_level")
         private val KEY_EDGE_ANIMATION_LEVEL = floatPreferencesKey("edge_animation_level")
         private val KEY_BATTERY_WIDTH = floatPreferencesKey("battery_width")
