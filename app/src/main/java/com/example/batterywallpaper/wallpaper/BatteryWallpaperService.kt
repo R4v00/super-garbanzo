@@ -8,7 +8,6 @@ import android.graphics.Canvas
 import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.graphics.Path
-import android.graphics.PorterDuff
 import android.graphics.RectF
 import android.os.BatteryManager
 import android.os.Handler
@@ -26,7 +25,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.math.sin
@@ -50,7 +48,7 @@ class BatteryWallpaperService : WallpaperService() {
 
         private var visible = false
         private var batteryLevel = 50f
-        private val drawRunnable: () -> Unit = { drawFrame() }
+        private val drawRunnable: Runnable = Runnable { drawFrame() }
 
         private val wallpaperScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
         private val settingsRepository = WallpaperSettingsRepository(this@BatteryWallpaperService)
@@ -134,7 +132,6 @@ class BatteryWallpaperService : WallpaperService() {
             if (currentHolder != null && currentSettings != null) {
                 val canvas = currentHolder.lockCanvas() ?: return
                 try {
-                    canvas.drawColor(android.graphics.Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
                     canvas.drawColor(currentSettings.backgroundColor)
                     drawBattery(canvas, currentSettings)
                 } finally {
@@ -204,7 +201,7 @@ class BatteryWallpaperService : WallpaperService() {
                     batteryPercent < 0.20f -> BatteryAmberValue
                     else -> BatteryGreenValue
                 }
-            }.toInt()
+            }
 
             if (fillPaint.color != 0) {
                 val fillHeight = batteryHeight * batteryPercent
@@ -282,7 +279,7 @@ class BatteryWallpaperService : WallpaperService() {
                     batteryPercent < 0.20f -> BatteryAmberValue
                     else -> BatteryGreenValue
                 }
-            }.toInt()
+            }
 
             val wobbleOffset = sin(nowSeconds() * 2f * settings.gaugeAnimationLevel) * strokeWidth
             val innerPadding = strokeWidth * 1.5f

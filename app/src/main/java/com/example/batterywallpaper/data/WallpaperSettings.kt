@@ -2,6 +2,7 @@ package com.example.batterywallpaper.data
 
 import android.content.Context
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -37,10 +38,10 @@ class WallpaperSettingsRepository(private val context: Context) {
                 edgeAnimationLevel = it[KEY_EDGE_ANIMATION_LEVEL] ?: 1f,
                 batteryWidth = it[KEY_BATTERY_WIDTH] ?: 0.6f,
                 batteryHeight = it[KEY_BATTERY_HEIGHT] ?: 0.3f,
-                batteryColor = it[KEY_BATTERY_COLOR] ?: 0,
-                backgroundColor = it[KEY_BACKGROUND_COLOR] ?: Color.Black.hashCode(),
-                textColor = it[KEY_TEXT_COLOR] ?: Color.White.hashCode(),
-                edgesColor = it[KEY_EDGES_COLOR] ?: Color.White.hashCode(),
+                batteryColor = it[KEY_BATTERY_COLOR] ?: Color.White.toArgb(),
+                backgroundColor = it[KEY_BACKGROUND_COLOR] ?: Color(0xFF222222).toArgb(),
+                textColor = it[KEY_TEXT_COLOR] ?: Color.White.toArgb(),
+                edgesColor = it[KEY_EDGES_COLOR] ?: Color.White.toArgb(),
                 textSize = it[KEY_TEXT_SIZE] ?: 0.5f
             )
         }
